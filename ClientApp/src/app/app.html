@@ -1,0 +1,41 @@
+<nav style="background: var(--bg-glass); backdrop-filter: blur(12px); padding: 1rem; border-bottom: 1px solid var(--border-color); display: flex; gap: 1rem; justify-content: center; align-items: center; position: sticky; top: 0; z-index: 10;">
+  <!-- Logo/Icon could go here -->
+  <a routerLink="/wizard" style="color: var(--accent-primary); text-decoration: none; font-weight: 800; padding: 0.5rem 1rem; border-radius: 8px; transition: background 0.3s; display: flex; align-items: center; gap: 0.4rem;" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">🪄 Asistan</a>
+  <a routerLink="/hesapla" style="color: var(--text-primary); text-decoration: none; font-weight: 600; padding: 0.5rem 1rem; border-radius: 8px; transition: background 0.3s;" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Hesapla</a>
+  <a routerLink="/karsilastirma" style="color: #60a5fa; text-decoration: none; font-weight: 600; padding: 0.5rem 1rem; border-radius: 8px; transition: background 0.3s;" routerLinkActive="active">Kıyasla</a>
+  <a routerLink="/hedef" style="color: #10b981; text-decoration: none; font-weight: 600; padding: 0.5rem 1rem; border-radius: 8px; transition: background 0.3s;" routerLinkActive="active">🎯 Kumbaram</a>
+  <a routerLink="/kredibasvuru" style="color: var(--text-primary); text-decoration: none; font-weight: 600; padding: 0.5rem 1rem; border-radius: 8px; transition: background 0.3s;" routerLinkActive="active">Başvuru</a>
+  <a routerLink="/gecmis" style="color: var(--text-primary); text-decoration: none; font-weight: 600; padding: 0.5rem 1rem; border-radius: 8px; transition: background 0.3s;" routerLinkActive="active">Geçmiş</a>
+  <a routerLink="/profil" style="color: var(--text-primary); text-decoration: none; font-weight: 600; padding: 0.5rem 1rem; border-radius: 8px; transition: background 0.3s;" routerLinkActive="active">Profilim</a>
+  <a routerLink="/admin" style="color: #fbbf24; text-decoration: none; font-weight: 600; padding: 0.5rem 1rem; border-radius: 8px; transition: background 0.3s;" routerLinkActive="active">Banka Paneli</a>
+  
+  <div style="margin-left: auto; display: flex; align-items: center; gap: 0.5rem; background: var(--bg-input); padding: 0.25rem; border-radius: 10px; border: 1px solid var(--border-color);">
+    <button *ngIf="authService.isLoggedIn()" (click)="logout()" style="background: rgba(239, 68, 68, 0.2); color: #fca5a5; border: 1px solid rgba(239, 68, 68, 0.3); padding: 0.4rem 1rem; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.85rem; transition: all 0.3s ease;">
+      Çıkış Yap
+    </button>
+    <div style="width: 1px; height: 20px; background: rgba(255,255,255,0.1); margin: 0 0.5rem;"></div>
+    <button (click)="setTheme('light')" [style.background]="isLightMode ? 'var(--accent-primary)' : 'transparent'" [style.color]="isLightMode ? 'white' : 'var(--text-secondary)'" style="border: none; padding: 0.4rem 1rem; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.85rem; transition: all 0.3s ease; display: flex; align-items: center; gap: 0.4rem;">
+      ☀️ Açık
+    </button>
+    <button (click)="setTheme('dark')" [style.background]="!isLightMode ? 'var(--accent-primary)' : 'transparent'" [style.color]="!isLightMode ? 'white' : 'var(--text-secondary)'" style="border: none; padding: 0.4rem 1rem; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.85rem; transition: all 0.3s ease; display: flex; align-items: center; gap: 0.4rem;">
+      🌙 Koyu
+    </button>
+  </div>
+</nav>
+
+<style>
+  nav a:hover {
+    background: var(--border-color);
+  }
+  nav a.active {
+    background: var(--accent-primary);
+    color: white !important;
+  }
+</style>
+
+<div class="container">
+  <router-outlet></router-outlet>
+</div>
+
+<app-notification></app-notification>
+<app-chatbot></app-chatbot>

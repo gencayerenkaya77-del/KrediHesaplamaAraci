@@ -1,0 +1,135 @@
+<div class="dashboard-header animate-slide-up" style="margin-top: 1rem;">
+  <h2>Kullanıcı Paneli & Finansal Sağlık Skoru</h2>
+  <p style="color: var(--text-secondary);">Yapay zeka algoritmalarımız geçmiş işlemlerinizi inceleyerek size özel bir finansal sağlık profili oluşturdu.</p>
+</div>
+
+<div class="health-dashboard animate-fade-in">
+  <div class="score-card glass-panel text-center">
+    <h3>Güven Endeksi</h3>
+    
+    <div class="circular-progress" [style.--progress]="creditScore / 1900 * 100" [style.--color]="healthColor">
+      <div class="inner-circle">
+        <div class="score-value">{{ creditScore }}</div>
+        <div class="score-max">/ 1900</div>
+      </div>
+    </div>
+    
+    <div class="health-status" [style.color]="healthColor">
+      {{ healthStatus }}
+    </div>
+    <p class="score-desc" style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 1rem;">
+      * Bu skor tamamen başvurularınızın onay/red durumlarına göre hesaplanmaktadır.
+    </p>
+  </div>
+
+  <div class="badges-card glass-panel">
+    <h3>Kazanılan Rozetler</h3>
+    <div class="badges-grid">
+      <div class="badge-item" *ngFor="let badge of badges">
+        <div class="badge-icon" [style.background]="badge.color + '20'" [style.color]="badge.color">
+          {{ badge.icon }}
+        </div>
+        <div class="badge-name">{{ badge.name }}</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="glass-panel animate-fade-in" style="margin-top: 2rem; position: relative;" id="calculation-history-pdf" [class.print-hidden]="activePrintSection && activePrintSection !== 'calculation-history-pdf'">
+  <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 2rem;">
+    <div>
+      <h2 style="margin: 0 0 0.5rem 0;">Hesaplama Geçmişi</h2>
+      <p style="color: var(--text-secondary); margin: 0;">Daha önce yaptığınız hesaplamaların ve risk analizlerinin kayıtları.</p>
+    </div>
+    <div style="display: flex; gap: 0.5rem;">
+      <button class="btn btn-danger" style="font-size: 0.85rem; padding: 0.4rem 1rem;" (click)="clearHistory()" [disabled]="isClearing">
+        {{ isClearing ? 'Temizleniyor...' : 'Tüm Geçmişi Temizle 🗑️' }}
+      </button>
+      <button class="btn btn-outline" (click)="downloadPdf('calculation-history-pdf', 'hesaplama_gecmisi')" [disabled]="isExporting">
+        {{ isExporting ? 'Hazırlanıyor...' : 'PDF İndir 📄' }}
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="isLoading" style="color: var(--accent-primary);">Yükleniyor...</div>
+
+  <div *ngIf="!isLoading && histories.length === 0" style="color: var(--text-secondary);">
+    Henüz kayıtlı bir hesaplama bulunamadı.
+  </div>
+
+  <div class="table-responsive" *ngIf="!isLoading && histories.length > 0">
+    <table>
+      <thead>
+        <tr>
+          <th>Tarih</th>
+          <th>Kredi Türü</th>
+          <th>Tutar</th>
+          <th>Vade</th>
+          <th>Aylık Taksit</th>
+          <th>Yapay Zeka Risk Sonucu</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let h of histories">
+          <td>{{ h.calculationDate | date:'short' }}</td>
+          <td>{{ h.product.name }}</td>
+          <td>{{ h.amount }} TL</td>
+          <td>{{ h.term }} Ay</td>
+          <td>{{ h.calculatedMonthlyPayment }} TL</td>
+          <td>
+            <span class="badge" [ngClass]="{'badge-success': h.riskStatus === 'good', 'badge-danger': h.riskStatus === 'bad'}">
+              {{ h.riskStatus === 'good' ? 'DÜŞÜK RİSK' : 'YÜKSEK RİSK' }}
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="glass-panel animate-fade-in" style="margin-top: 2rem; position: relative;" id="application-history-pdf" [class.print-hidden]="activePrintSection && activePrintSection !== 'application-history-pdf'">
+  <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 2rem;">
+    <div>
+      <h2 style="margin: 0 0 0.5rem 0;">Kredi Başvuru Geçmişi</h2>
+      <p style="color: var(--text-secondary); margin: 0;">Daha önce yaptığınız kredi başvurularının kayıtları.</p>
+    </div>
+    <button class="btn btn-outline" (click)="downloadPdf('application-history-pdf', 'basvuru_gecmisi')" [disabled]="isExporting">
+      {{ isExporting ? 'Hazırlanıyor...' : 'PDF İndir 📄' }}
+    </button>
+  </div>
+
+  <div *ngIf="isLoading" style="color: var(--accent-primary);">Yükleniyor...</div>
+
+  <div *ngIf="!isLoading && applicationHistory.length === 0" style="color: var(--text-secondary);">
+    Henüz kayıtlı bir kredi başvurusu bulunamadı.
+  </div>
+
+  <div class="table-responsive" *ngIf="!isLoading && applicationHistory.length > 0">
+    <table>
+      <thead>
+        <tr>
+          <th>Ad Soyad</th>
+          <th>Banka</th>
+          <th>Kredi Türü</th>
+          <th>Tutar</th>
+          <th>Vade</th>
+          <th>Durum</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let a of applicationHistory">
+          <td>{{ a.nameSurname }}</td>
+          <td>{{ a.bankName }}</td>
+          <td>{{ a.loanType }}</td>
+          <td>{{ a.amount }} TL</td>
+          <td>{{ a.loanTerm }} Ay</td>
+          <td>
+            <span class="badge badge-neutral" *ngIf="a.status === 'Beklemede'">{{ a.status }}</span>
+            <span class="badge badge-success" *ngIf="a.status === 'Onaylandı'">{{ a.status }}</span>
+            <span class="badge badge-danger" *ngIf="a.status === 'Reddedildi'">{{ a.status }}</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

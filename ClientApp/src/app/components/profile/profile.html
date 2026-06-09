@@ -1,0 +1,114 @@
+<div class="profile-container animate-fade-in">
+  <div class="header">
+    <h2>👤 Finansal Profilim & Yapay Zeka Özetiniz</h2>
+    <p>Açık bankacılık, harcama analizleriniz ve kredi skorunuz tek bir ekranda.</p>
+  </div>
+
+  <div class="dashboard-grid">
+    <!-- 1. Kredi Notu Kadranı (Findeks Simülasyonu) -->
+    <div class="dashboard-card glass-panel text-center">
+      <h3>Dinamik Kredi Skoru</h3>
+      
+      <div class="gauge-container">
+        <svg viewBox="0 0 200 100" class="gauge-svg">
+          <!-- Background arc -->
+          <path d="M 10 100 A 90 90 0 0 1 190 100" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="15" stroke-linecap="round"/>
+          <!-- Value arc (Gradient or Colored) -->
+          <path d="M 10 100 A 90 90 0 0 1 190 100" fill="none" stroke="url(#gradient)" stroke-width="15" stroke-linecap="round" class="gauge-value"/>
+          <defs>
+            <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#ef4444" />
+              <stop offset="50%" stop-color="#fbbf24" />
+              <stop offset="100%" stop-color="#10b981" />
+            </linearGradient>
+          </defs>
+          
+          <!-- Needle -->
+          <g [style.transform]="'rotate(' + gaugeRotation + 'deg)'" style="transform-origin: 100px 100px; transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1);">
+            <polygon points="96,100 104,100 100,20" fill="var(--text-primary)" />
+            <circle cx="100" cy="100" r="6" fill="var(--text-primary)" />
+          </g>
+        </svg>
+        <div class="gauge-score">
+          <span class="score-number">{{ creditScore }}</span>
+          <span class="score-text">{{ scoreCategory }}</span>
+        </div>
+      </div>
+      
+      <div class="ai-insight" style="margin-top: 1rem;">
+        🤖 <strong>AI Analizi:</strong> Eğer Garanti Bankası'ndaki açık olan kredinizi kapatırsanız puanınız <strong>1620</strong>'ye çıkacak!
+      </div>
+    </div>
+
+    <!-- 2. Açık Bankacılık (Open Banking) -->
+    <div class="dashboard-card glass-panel">
+      <h3>🌐 Açık Bankacılık (Bağlı Hesaplar)</h3>
+      <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1.5rem;">Yapay zeka diğer bankalardaki hesaplarınızı taradı.</p>
+      
+      <div class="bank-list">
+        <div class="bank-item" *ngFor="let acc of openBankingAccounts">
+          <div class="bank-info">
+            <span class="bank-logo">{{ acc.logo }}</span>
+            <span class="bank-name">{{ acc.bankName }}</span>
+          </div>
+          <strong class="bank-debt" style="color: #fca5a5;">{{ acc.debt | currency:'TRY':'symbol':'1.0-0' }}</strong>
+        </div>
+      </div>
+
+      <div class="consolidation-box">
+        <div class="total-debt">Toplam Dış Borç: <strong>{{ totalExternalDebt | currency:'TRY':'symbol':'1.0-0' }}</strong></div>
+        <button class="btn btn-primary w-100" style="margin-top: 1rem;" (click)="consolidateDebt()">
+          Tek Kredide Birleştir & Rahatla ✨
+        </button>
+      </div>
+    </div>
+
+    <!-- 3. Param Nereye Gitti? (Harcama Analizi) -->
+    <div class="dashboard-card glass-panel">
+      <h3>💸 Param Nereye Gitti?</h3>
+      <div class="expense-container">
+        <!-- CSS Conic Gradient Pie Chart -->
+        <div class="pie-chart-wrapper">
+          <div class="pie-chart"></div>
+          <div class="pie-center">
+            <small>Toplam</small><br>
+            <strong>{{ totalExpense | currency:'TRY':'symbol':'1.0-0' }}</strong>
+          </div>
+        </div>
+        
+        <div class="expense-legend">
+          <div class="legend-item" *ngFor="let exp of expenses">
+            <div class="legend-color" [style.backgroundColor]="exp.color"></div>
+            <div class="legend-info">
+              <span class="legend-name">{{ exp.category }}</span>
+              <span class="legend-percent">%{{ exp.percent }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="ai-insight alert-warning" style="margin-top: 1.5rem;">
+        ⚠️ <strong>Uyarı:</strong> Bu ay Dışarıda Yemeğe çok harcadınız (3.500 TL). Bunu %30 kısarsanız "Kumbaram" hedefinize 2 ay daha erken ulaşırsınız!
+      </div>
+    </div>
+
+    <!-- 4. Netflix Tarzı Akıllı Vitrin -->
+    <div class="dashboard-card glass-panel" style="grid-column: 1 / -1;">
+      <h3>🎬 Sizin İçin Seçtiklerimiz (Akıllı Vitrin)</h3>
+      <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem;">Geçmiş harcamalarınız ve yaş profilinize %100 uyan teklifler:</p>
+      
+      <div class="carousel-container">
+        <div class="carousel-track">
+          <div class="netflix-card" *ngFor="let rec of recommendations">
+            <div class="match-badge">🟢 %{{ rec.match }} Eşleşme</div>
+            <div class="card-icon">{{ rec.icon }}</div>
+            <h4>{{ rec.title }}</h4>
+            <p>{{ rec.description }}</p>
+            <button class="btn btn-outline btn-sm">İncele</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</div>

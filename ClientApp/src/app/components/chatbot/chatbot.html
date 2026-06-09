@@ -1,0 +1,44 @@
+<div class="chatbot-wrapper">
+  
+  <!-- Chat Window -->
+  <div class="chat-window glass-panel" [class.open]="isOpen">
+    <div class="chat-header">
+      <div class="header-info">
+        <span class="bot-icon">🤖</span>
+        <div>
+          <h4 style="margin: 0; font-size: 1rem;">AI Kredi Asistanı</h4>
+          <small style="color: #6ee7b7;">● Çevrimiçi</small>
+        </div>
+      </div>
+      <button class="close-btn" (click)="toggleChat()">×</button>
+    </div>
+
+    <div class="chat-body" #chatBody>
+      <div class="message" *ngFor="let msg of messages" [ngClass]="msg.isBot ? 'bot-message' : 'user-message'">
+        <div class="msg-content" *ngIf="msg.isHtml" [innerHTML]="msg.text"></div>
+        <div class="msg-content" *ngIf="!msg.isHtml">{{ msg.text }}</div>
+      </div>
+
+      <!-- Typing Indicator -->
+      <div class="message bot-message" *ngIf="isLoading">
+        <div class="msg-content typing-indicator">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="chat-footer">
+      <input type="text" [(ngModel)]="userInput" (keyup.enter)="sendMessage()" placeholder="Bir şeyler yazın..." class="chat-input" />
+      <button class="send-btn" (click)="sendMessage()">
+        ➤
+      </button>
+    </div>
+  </div>
+
+  <!-- Floating Button -->
+  <button class="chat-fab" (click)="toggleChat()" [class.hidden]="isOpen">
+    <span class="fab-icon">💬</span>
+  </button>
+</div>

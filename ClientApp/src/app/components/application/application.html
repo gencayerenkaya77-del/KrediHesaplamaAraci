@@ -1,0 +1,203 @@
+<div class="application-container" style="position: relative;">
+  
+  <!-- AI Loading Overlay -->
+  <div class="ai-loading-overlay" *ngIf="isAiLoading">
+    <div class="spinner-wrapper">
+      <div class="brain-icon">🧠</div>
+      <div class="scan-line"></div>
+    </div>
+    <h2 class="ai-text">Yapay Zeka Analiz Ediyor...</h2>
+    <p>Risk profiliniz ML modellerimiz tarafından inceleniyor</p>
+  </div>
+
+  <div class="application-container animate-fade-in">
+  <div class="form-card glass-panel" style="position: relative; overflow: hidden;">
+    <div class="form-header text-center">
+      <h2>Kredi Başvuru Formu</h2>
+      <p>Hayallerinizdeki krediye ulaşmak için bilgilerinizi girin.</p>
+    </div>
+
+    <!-- AI Doküman Tarayıcı (OCR Simülasyonu) -->
+    <div class="ocr-scanner-box" [class.scanning]="isScanning" [class.scanned]="isScanned">
+      <div class="scanner-content" *ngIf="!isScanning && !isScanned">
+        <div class="icon">📄</div>
+        <h4>Akıllı Form Doldurucu</h4>
+        <p>Zaman kazanın! Kimlik veya Maaş Bordronuzu yükleyin, formu sizin için yapay zeka doldursun.</p>
+        <button type="button" class="btn btn-secondary btn-sm" (click)="fileInput.click()">Belge Yükle</button>
+        <input type="file" #fileInput (change)="onFileUpload($event)" style="display: none;" accept="image/*,.pdf">
+      </div>
+      
+      <div class="scanner-animation" *ngIf="isScanning">
+        <div class="doc-icon">📄</div>
+        <div class="laser-line"></div>
+        <p class="scan-text">Yapay Zeka Belgeyi Okuyor...</p>
+      </div>
+
+      <div class="scanner-success" *ngIf="isScanned">
+        <div class="success-icon">✅</div>
+        <p>Belge başarıyla okundu ve bilgileriniz forma aktarıldı!</p>
+      </div>
+    </div>
+
+    <form (ngSubmit)="submit()" #appForm="ngForm">
+      <div class="wizard-header">
+        <h2>Kredi Başvuru Sistemi</h2>
+        <div class="step-indicator">
+          <div class="step" [class.active]="step >= 1">1. Kişisel</div>
+          <div class="step-line" [class.active]="step >= 2"></div>
+          <div class="step" [class.active]="step >= 2">2. Finansal</div>
+          <div class="step-line" [class.active]="step >= 3"></div>
+          <div class="step" [class.active]="step >= 3">3. Analiz & Onay</div>
+        </div>
+      </div>
+
+      <div class="wizard-body">
+        <!-- STEP 1 -->
+        <div class="wizard-step" *ngIf="step === 1">
+          <div class="form-group">
+            <label>Ad Soyad:</label>
+            <input type="text" class="form-control" [(ngModel)]="nameSurname" name="nameSurname" placeholder="Örn: Ahmet Yılmaz" />
+          </div>
+          <div class="form-group">
+            <label>E-mail Adresi:</label>
+            <input type="email" class="form-control" [(ngModel)]="email" name="email" placeholder="ornek@mail.com" />
+          </div>
+          <div class="form-row">
+            <div class="form-group half">
+              <label>Yaş:</label>
+              <input type="number" class="form-control" [(ngModel)]="age" name="age" placeholder="25" />
+            </div>
+            <div class="form-group half">
+              <label>Cinsiyet:</label>
+              <select class="form-control" [(ngModel)]="sex" name="sex">
+                <option value="male">Erkek</option>
+                <option value="female">Kadın</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 2 -->
+        <div class="wizard-step" *ngIf="step === 2">
+          <div class="form-group">
+            <label>Banka Seçiniz:</label>
+            <select class="form-control" [(ngModel)]="bankName" name="bankName">
+              <option value="" disabled selected>Banka Seçiniz</option>
+              <option *ngFor="let bank of banks" [value]="bank">{{ bank }}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Kredi Türü:</label>
+            <select class="form-control" [(ngModel)]="loanType" name="loanType">
+              <option value="" disabled selected>Kredi Türü Seçiniz</option>
+              <option *ngFor="let type of loanTypes" [value]="type">{{ type }}</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <div class="form-group half">
+              <label>Kredi Tutarı (TL):</label>
+              <input type="number" class="form-control" [(ngModel)]="amount" name="amount" placeholder="Örn: 50000" />
+            </div>
+            <div class="form-group half">
+              <label>Vade (Ay):</label>
+              <input type="number" class="form-control" [(ngModel)]="loanTerm" name="loanTerm" placeholder="Örn: 24" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Kullanım Amacı:</label>
+            <select class="form-control" [(ngModel)]="purpose" name="purpose">
+              <option value="radio/TV">Eşya / Elektronik</option>
+              <option value="education">Eğitim</option>
+              <option value="furniture/equipment">Mobilya</option>
+              <option value="car">Araç</option>
+              <option value="business">İş / Ticari</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- STEP 3 -->
+        <div class="wizard-step" *ngIf="step === 3">
+          <div class="info-alert">
+            ℹ️ Girdiğiniz veriler <strong>Yapay Zeka Risk Modelimiz</strong> tarafından analiz edilecektir. Lütfen aşağıdaki bilgileri onaylayın.
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group half">
+              <label>Barınma Durumu:</label>
+              <select class="form-control" [(ngModel)]="housing" name="housing">
+                <option value="own">Kendi Evim</option>
+                <option value="rent">Kiracı</option>
+                <option value="free">Aile ile (Ücretsiz)</option>
+              </select>
+            </div>
+            <div class="form-group half">
+              <label>Mesleki Durum:</label>
+              <select class="form-control" [(ngModel)]="job" name="job">
+                <option [ngValue]="0">İşsiz / Öğrenci</option>
+                <option [ngValue]="1">Vasıfsız Çalışan</option>
+                <option [ngValue]="2">Uzman / Nitelikli Çalışan</option>
+                <option [ngValue]="3">Yönetici / Serbest Meslek</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="error" class="error-message">
+          {{ error }}
+        </div>
+      </div>
+
+      <div class="wizard-footer">
+        <button class="btn btn-outline" type="button" *ngIf="step > 1" (click)="prevStep()">Geri</button>
+        <button class="btn" type="button" style="background: rgba(239, 68, 68, 0.2); color: #fca5a5; border: 1px solid rgba(239, 68, 68, 0.3);" (click)="resetForm()" title="Formu Temizle">Temizle 🧹</button>
+        <div class="spacer" style="flex: 1;"></div>
+        <button class="btn btn-primary" type="button" *ngIf="step < 3" (click)="nextStep()">İleri ➔</button>
+        <button class="btn btn-success submit-btn" type="submit" *ngIf="step === 3" [disabled]="!appForm.form.valid || isAiLoading">
+          {{ isAiLoading ? 'İşleniyor...' : 'Yapay Zeka Analizine Gönder' }}
+        </button>
+      </div>
+    </form>
+    
+    <!-- What-If Modal (Ya Şöyle Olursa?) -->
+    <div class="modal-overlay" *ngIf="showWhatIfModal">
+      <div class="modal-content glass-panel animate-slide-up">
+        <div class="modal-icon text-center" style="font-size: 3rem; margin-bottom: 1rem;">💡</div>
+        <h3 class="text-center" style="color: #fbbf24; margin-bottom: 1rem;">Bir Önerimiz Var!</h3>
+        <p style="text-align: center; color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.6;">
+          Girdiğiniz bilgilere göre aylık taksit tutarınız gelirinizin büyük bir kısmını oluşturuyor. Kredi onay ihtimalinizi <strong>%85 oranında artırmak</strong> için vadenizi uzatabiliriz.
+        </p>
+        
+        <div class="suggestion-card" style="background: rgba(16, 185, 129, 0.1); border: 1px dashed #10b981; padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem;">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+            <span>Mevcut Vade:</span> <strong>{{ loanTerm }} Ay</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; color: #10b981;">
+            <span>Önerilen Vade:</span> <strong>{{ suggestedTerm }} Ay</strong>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 1rem;">
+          <button type="button" class="btn btn-secondary" style="flex: 1;" (click)="rejectSuggestion()">Hayır, Orijinal Formu Gönder</button>
+          <button type="button" class="btn btn-primary" style="flex: 1; background: #10b981; border-color: #10b981;" (click)="acceptSuggestion()">Evet, Güncelle & Gönder</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Success Modal -->
+<div class="modal-overlay animate-fade-in" *ngIf="showModal">
+  <div class="modal-content glass-panel">
+    <div class="modal-header">
+      <h3 style="margin: 0; color: #10b981;">✅ Başvuru Tamamlandı</h3>
+    </div>
+    <div class="modal-body" style="padding: 2rem 0; text-align: center;">
+      <p style="font-size: 1.1rem;">Kredi Başvurunuz alınmış ve Yapay Zeka değerlendirmesi sisteme kaydedilmiştir.</p>
+      <p style="color: var(--text-secondary); margin-top: 1rem;">Durumunu "Banka Paneli" veya "Geçmiş" sayfasından takip edebilirsiniz.</p>
+    </div>
+    <div class="modal-footer" style="text-align: right; margin-top: 1rem;">
+      <button class="btn btn-primary" style="padding: 0.5rem 2rem;" (click)="closeModal()">Kapat</button>
+    </div>
+  </div>
+</div>

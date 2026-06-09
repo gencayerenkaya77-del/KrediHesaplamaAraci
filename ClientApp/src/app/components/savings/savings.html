@@ -1,0 +1,64 @@
+<div class="savings-container animate-fade-in">
+  <div class="savings-header text-center">
+    <h2>🎯 Finansal Hedef Kumbarası</h2>
+    <p>Hayalleriniz için borçlanmak yerine biriktirmeyi seçin. Ne kadar tasarruf edeceğinizi birlikte görelim.</p>
+  </div>
+
+  <div class="savings-card glass-panel" *ngIf="!hasResult">
+    <div class="form-group">
+      <label>Hedefin Nedir? (Örn: Tesla Peşinatı, Maldivler Tatili)</label>
+      <input type="text" class="form-control" [(ngModel)]="goalName" placeholder="Hedefini yaz...">
+    </div>
+
+    <div class="form-group">
+      <label>Ne Kadara İhtiyacın Var? (TL)</label>
+      <div class="slider-group">
+        <div class="slider-value">{{ targetAmount | currency:'TRY':'symbol':'1.0-0' }}</div>
+        <input type="range" class="styled-slider" min="5000" max="1000000" step="5000" [(ngModel)]="targetAmount">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Hedefine Kaç Ayda Ulaşmak İstiyorsun?</label>
+      <div class="slider-group">
+        <div class="slider-value">{{ targetMonths }} Ay</div>
+        <input type="range" class="styled-slider" min="3" max="60" step="1" [(ngModel)]="targetMonths">
+      </div>
+    </div>
+
+    <button class="btn btn-primary btn-block animate-pulse-slight" style="width: 100%; margin-top: 2rem; font-size: 1.1rem; padding: 1rem;" (click)="calculate()">
+      Hedefimi Hesapla ✨
+    </button>
+  </div>
+
+  <div class="result-card glass-panel animate-slide-up" *ngIf="hasResult">
+    <div class="piggy-bank animate-bounce">🐷</div>
+    <h3 class="text-center" style="color: var(--accent-primary); margin-bottom: 0.5rem;">{{ goalName }} Hedefin İçin Plan Hazır!</h3>
+    <p class="text-center" style="color: var(--text-secondary); margin-bottom: 2rem;">Birlikte başarabiliriz.</p>
+
+    <div class="comparison-grid">
+      <div class="save-box">
+        <h4>Kumbaraya Atarsan</h4>
+        <div class="big-amount text-success">{{ monthlySavings | currency:'TRY':'symbol':'1.0-0' }} / ay</div>
+        <p>Hiç faiz ödemeden, kendi paranla hedefine ulaşırsın.</p>
+      </div>
+
+      <div class="vs-badge">VS</div>
+
+      <div class="loan-box">
+        <h4>Kredi Çekersen</h4>
+        <div class="big-amount text-danger">{{ loanAlternative.monthlyPayment | currency:'TRY':'symbol':'1.0-0' }} / ay</div>
+        <p>Bankaya fazladan <strong>{{ loanAlternative.totalInterest | currency:'TRY':'symbol':'1.0-0' }}</strong> faiz ödemek zorunda kalırsın.</p>
+      </div>
+    </div>
+
+    <div class="ai-advice">
+      <strong>🤖 AI Tavsiyesi:</strong> "Faiz ödemek yerine aylık gelirinin bir kısmını otomatik olarak Vadeli Hesabına (Kumbarana) aktarma talimatı vererek paranı bankada çalıştırabilirsin. Böylece hedefine çok daha erken bile ulaşabilirsin!"
+    </div>
+
+    <div class="actions text-center" style="margin-top: 2rem;">
+      <button class="btn btn-secondary" (click)="reset()">Yeniden Hesapla</button>
+      <button class="btn btn-success" style="margin-left: 1rem;">Otomatik Birikim Talimatı Ver (Demo)</button>
+    </div>
+  </div>
+</div>

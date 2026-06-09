@@ -1,0 +1,111 @@
+<div class="wizard-container animate-fade-in">
+  <div class="wizard-box glass-panel">
+    
+    <!-- İlerleme Çubuğu -->
+    <div class="wizard-progress">
+      <div class="progress-bar">
+        <div class="progress-fill" [style.width]="((currentStep - 1) / 3 * 100) + '%'"></div>
+      </div>
+      <div class="step-indicator">Adım {{ currentStep < 4 ? currentStep : 3 }} / 3</div>
+    </div>
+
+    <!-- Adım 1: Amaç -->
+    <div class="wizard-step animate-slide-up" *ngIf="currentStep === 1">
+      <div class="text-center">
+        <h2>Hayalindeki plan nedir? 🎯</h2>
+        <p class="subtitle">Sana en uygun finansmanı bulmamız için neye ihtiyacın olduğunu söylemen yeterli.</p>
+      </div>
+      
+      <div class="purpose-grid">
+        <div class="purpose-card" 
+             *ngFor="let p of purposes" 
+             [class.selected]="wizardData.purpose === p.id"
+             (click)="selectPurpose(p.id)">
+          <div class="purpose-icon">{{ p.icon }}</div>
+          <div class="purpose-name">{{ p.name }}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Adım 2: Bütçe -->
+    <div class="wizard-step animate-slide-up" *ngIf="currentStep === 2">
+      <div class="text-center">
+        <h2>Aylık bütçeni ne kadar sarsmadan ödeyebilirsin? 💰</h2>
+        <p class="subtitle">Seni zorlamayacak rahat bir aylık taksit tutarı belirle.</p>
+      </div>
+
+      <div class="budget-slider-container">
+        <div class="budget-display" style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-bottom: 2rem;">
+          <span style="font-size: 2rem; color: var(--accent-primary); font-weight: 800;">₺</span>
+          <input type="number" 
+                 class="budget-input-direct" 
+                 [(ngModel)]="wizardData.monthlyBudget" 
+                 min="1000" max="250000" step="1000">
+          <span style="font-size: 1.5rem; color: var(--text-secondary); font-weight: 600;">/ ay</span>
+        </div>
+        
+        <input type="range" class="styled-slider" 
+               min="1000" max="250000" step="1000" 
+               [(ngModel)]="wizardData.monthlyBudget">
+        
+        <div class="slider-labels">
+          <span>₺1.000</span>
+          <span>₺125.000</span>
+          <span>₺250.000+</span>
+        </div>
+      </div>
+
+      <div class="wizard-actions">
+        <button class="btn btn-secondary" (click)="prevStep()">Geri</button>
+        <button class="btn btn-primary" (click)="nextStep()">Sonuçları Gör 🚀</button>
+      </div>
+    </div>
+
+    <!-- Adım 3: Yüklenme / Tarama -->
+    <div class="wizard-step animate-fade-in text-center" *ngIf="currentStep === 3">
+      <div class="scanning-animation">
+        <div class="brain-icon">🧠</div>
+        <div class="scan-line"></div>
+      </div>
+      <h2>Yapay Zeka Analiz Ediyor...</h2>
+      <p class="subtitle" style="margin-top: 1rem;">Girdiğin verilere göre binlerce senaryo taranıyor ve sana en uygun banka teklifi hazırlanıyor.</p>
+    </div>
+
+    <!-- Adım 4: Sonuç -->
+    <div class="wizard-step animate-slide-up text-center" *ngIf="currentStep === 4 && recommendation">
+      <div class="success-icon animate-bounce">🎉</div>
+      <h2 style="color: var(--accent-primary);">İşte Sana Özel Teklif!</h2>
+      <p class="subtitle">{{ recommendation.description }}</p>
+
+      <div class="recommendation-card">
+        <div class="rec-header">
+          <h3>{{ recommendation.loanType }}</h3>
+        </div>
+        <div class="rec-body">
+          <div class="rec-row">
+            <span>Tutar</span>
+            <strong>{{ recommendation.amount | currency:'TRY':'symbol':'1.0-0' }}</strong>
+          </div>
+          <div class="rec-row">
+            <span>Vade</span>
+            <strong>{{ recommendation.term }} Ay</strong>
+          </div>
+          <div class="rec-row">
+            <span>Faiz Oranı</span>
+            <strong>%{{ recommendation.interestRate }}</strong>
+          </div>
+          <div class="rec-row total">
+            <span>Aylık Taksit</span>
+            <strong style="color: #10b981; font-size: 1.5rem;">{{ recommendation.monthlyPayment | currency:'TRY':'symbol':'1.0-0' }}</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="wizard-actions" style="justify-content: center; margin-top: 2rem;">
+        <button class="btn btn-secondary" (click)="currentStep = 1">Tekrar Dene</button>
+        <button class="btn btn-primary" style="font-size: 1.1rem; padding: 1rem 2rem;" (click)="applyNow()">Hemen Başvur ✨</button>
+      </div>
+    </div>
+
+  </div>
+</div>

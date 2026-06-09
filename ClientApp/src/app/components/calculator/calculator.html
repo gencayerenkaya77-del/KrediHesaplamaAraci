@@ -1,0 +1,182 @@
+<div class="glass-panel" style="margin-top: 2rem;">
+  <h2>Kredi Hesaplama & Risk Analizi</h2>
+  <p style="color: var(--text-secondary); margin-bottom: 2rem;">İstediğiniz kredi türünü seçerek aylık ödeme ve yapay zeka destekli risk analizi sonucunu görüntüleyin.</p>
+
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+    <!-- Form -->
+    <div>
+      <div class="form-group">
+        <label>Kredi Türü</label>
+        <select class="form-control" [(ngModel)]="selectedProductId">
+          <option *ngFor="let p of products" [ngValue]="p.id">{{ p.name }} (%{{ p.interestRate }})</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Tutar (TL)</label>
+        <input type="number" class="form-control" [(ngModel)]="amount" />
+      </div>
+
+      <div class="form-group">
+        <label>Vade (Ay)</label>
+        <input type="number" class="form-control" [(ngModel)]="term" />
+      </div>
+
+      <h4 style="margin-top: 1.5rem; color: var(--text-secondary);">Risk Analizi Parametreleri</h4>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+        <div class="form-group">
+          <label>Yaş</label>
+          <input type="number" class="form-control" [(ngModel)]="age" />
+        </div>
+        <div class="form-group">
+          <label>Cinsiyet</label>
+          <select class="form-control" [(ngModel)]="sex">
+            <option value="male">Erkek</option>
+            <option value="female">Kadın</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Ev Durumu</label>
+          <select class="form-control" [(ngModel)]="housing">
+            <option value="own">Kendisine Ait</option>
+            <option value="rent">Kira</option>
+            <option value="free">Ücretsiz</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Kredi Amacı</label>
+          <select class="form-control" [(ngModel)]="purpose">
+            <option value="car">Araç</option>
+            <option value="radio/TV">Elektronik (Radyo/TV)</option>
+            <option value="furniture/equipment">Mobilya</option>
+            <option value="business">İş</option>
+            <option value="education">Eğitim</option>
+          </select>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+        <button *ngIf="!isLoading" class="btn btn-primary" style="flex: 2;" (click)="calculate()">
+          Hesapla ve Analiz Et
+        </button>
+        <button *ngIf="!isLoading" class="btn" style="flex: 1; background: rgba(239, 68, 68, 0.2); color: #fca5a5; border: 1px solid rgba(239, 68, 68, 0.3);" (click)="clearForm()" title="Formu Temizle">
+          Temizle 🧹
+        </button>
+      </div>
+
+      <div *ngIf="isLoading" style="margin-top: 1.5rem; text-align: center; padding: 1rem; background: rgba(59, 130, 246, 0.1); border: 1px solid var(--accent-primary); border-radius: 8px;">
+        <div style="font-weight: 600; color: var(--accent-primary); display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+          <span style="display: inline-block; animation: spin 1s linear infinite;">🧠</span> Yapay Zeka Risk Analizi Yapıyor...
+        </div>
+        <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.5rem; margin-bottom: 0;">Lütfen bekleyin, verileriniz banka politikalarına göre değerlendiriliyor.</p>
+        <style>
+          @keyframes spin { 100% { transform: rotate(360deg); } }
+        </style>
+      </div>
+
+      <div *ngIf="error" style="margin-top: 1rem; color: var(--danger); font-size: 0.875rem;">
+        {{ error }}
+      </div>
+    </div>
+
+    <!-- Results -->
+    <div *ngIf="result" class="animate-fade-in" style="background: rgba(0,0,0,0.2); padding: 1.5rem; border-radius: 12px;">
+      <h3>Hesaplama Sonucu</h3>
+      <div style="display: flex; flex-direction: column; gap: 1rem; margin-top: 1.5rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 0.5rem;">
+          <span style="color: var(--text-secondary);">Aylık Taksit:</span>
+          <span style="font-size: 1.5rem; font-weight: 700; color: var(--accent-primary);">{{ result.monthlyPayment }} TL</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 0.5rem;">
+          <span style="color: var(--text-secondary);">Toplam Vergi (BSMV+KKDF):</span>
+          <span style="font-size: 1.2rem; font-weight: 600; color: var(--warning);">{{ result.totalTax || 0 }} TL</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 0.5rem;">
+          <span style="color: var(--text-secondary);">Toplam Geri Ödeme:</span>
+          <span style="font-size: 1.2rem; font-weight: 600;">{{ result.totalPayment }} TL</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 0.5rem; margin-bottom: 0.5rem;">
+          <span style="color: var(--text-secondary);">Yapay Zeka Risk Sonucu:</span>
+          <span class="badge" [ngClass]="{'badge-success': result.riskStatus === 'good', 'badge-danger': result.riskStatus === 'bad'}">
+            {{ result.riskStatus === 'good' ? 'DÜŞÜK RİSK (Onaylanabilir)' : 'YÜKSEK RİSK (Reddedilebilir)' }}
+          </span>
+        </div>
+
+        <!-- Explainable AI (Açıklanabilir Yapay Zeka) -->
+        <div *ngIf="result.riskStatus === 'bad' && result.riskReasons && result.riskReasons.length > 0" 
+             style="background: rgba(239, 68, 68, 0.1); border-left: 4px solid var(--danger); padding: 1rem; border-radius: 4px; margin-bottom: 1rem;">
+          <h4 style="color: var(--danger); margin-top: 0; margin-bottom: 0.5rem; font-size: 0.9rem;">Yapay Zeka Karar Nedenleri:</h4>
+          <ul style="margin: 0; padding-left: 1.2rem; color: #fca5a5; font-size: 0.85rem;">
+            <li *ngFor="let reason of result.riskReasons" style="margin-bottom: 0.25rem;">{{ reason }}</li>
+          </ul>
+        </div>
+        
+        <div *ngIf="result.riskStatus === 'good' && result.riskReasons && result.riskReasons.length > 0" 
+             style="background: rgba(16, 185, 129, 0.1); border-left: 4px solid var(--success); padding: 1rem; border-radius: 4px; margin-bottom: 1rem;">
+          <p style="margin: 0; color: #6ee7b7; font-size: 0.85rem;">{{ result.riskReasons[0] }}</p>
+        </div>
+        
+        <!-- Chart.js Canvas -->
+        <div style="width: 100%; max-width: 300px; margin: 0 auto;">
+          <canvas baseChart
+            [data]="pieChartData"
+            [options]="pieChartOptions"
+            [type]="pieChartType">
+          </canvas>
+        </div>
+
+        <!-- E-Mail Integration -->
+        <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.1);">
+          <label style="font-size: 0.85rem; color: var(--text-secondary); display: block; margin-bottom: 0.5rem;">Kredi Teklifini E-Posta ile Gönder</label>
+          <div style="display: flex; gap: 0.5rem;">
+            <input type="email" class="form-control" placeholder="E-Posta Adresi" [(ngModel)]="userEmail" style="flex: 1;" />
+            <button class="btn btn-primary" (click)="sendEmail()" [disabled]="isSendingEmail">
+              {{ isSendingEmail ? 'Gönderiliyor...' : 'Gönder ✉️' }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Amortization Table -->
+<div *ngIf="result" class="glass-panel animate-fade-in" style="margin-top: 2rem;">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+    <h3 style="margin: 0;">Ödeme Planı (İtfa Tablosu)</h3>
+  </div>
+
+  <!-- Line Chart for Amortization -->
+  <div style="width: 100%; height: 300px; margin-bottom: 2rem; background: rgba(0,0,0,0.2); border-radius: 12px; padding: 1rem;">
+    <canvas baseChart
+      [data]="lineChartData"
+      [options]="lineChartOptions"
+      [type]="lineChartType">
+    </canvas>
+  </div>
+
+  <div class="table-responsive">
+    <table>
+      <thead>
+        <tr>
+          <th>Ay</th>
+          <th>Taksit Tutarı</th>
+          <th>Ana Para</th>
+          <th>Faiz</th>
+          <th>Vergi (BSMV+KKDF)</th>
+          <th>Kalan Bakiye</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of result.amortizationPlan">
+          <td>{{ row.month }}</td>
+          <td>{{ row.installmentAmount }} TL</td>
+          <td>{{ row.principalAmount }} TL</td>
+          <td>{{ row.interestAmount }} TL</td>
+          <td style="color: var(--warning);">{{ row.totalTax }} TL</td>
+          <td>{{ row.remainingPrincipal }} TL</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

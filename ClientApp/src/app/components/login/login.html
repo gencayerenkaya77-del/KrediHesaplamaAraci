@@ -1,0 +1,45 @@
+<div class="login-container animate-fade-in">
+  <div class="glass-panel login-box">
+    <div class="text-center" style="margin-bottom: 2rem;">
+      <h2 style="margin: 0; color: #facc15;">{{ isLoginMode ? 'Yetkili Girişi' : 'Yetkili Kaydı' }}</h2>
+      <p style="color: var(--text-secondary); font-size: 0.9rem;">
+        {{ isLoginMode ? 'Banka paneline erişmek için giriş yapınız.' : 'Yeni banka personeli hesabı oluşturun.' }}
+      </p>
+    </div>
+
+    <!-- Toggle Tabs -->
+    <div class="auth-tabs">
+      <button type="button" [class.active]="isLoginMode" (click)="!isLoginMode ? toggleMode() : null">Giriş Yap</button>
+      <button type="button" [class.active]="!isLoginMode" (click)="isLoginMode ? toggleMode() : null">Kayıt Ol</button>
+    </div>
+
+    <form (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label>Kullanıcı Adı</label>
+        <input type="text" class="form-control" [(ngModel)]="credentials.username" name="username" placeholder="admin" required />
+      </div>
+
+      <div class="form-group" [style.marginBottom]="isLoginMode ? '2rem' : '1rem'">
+        <label>Şifre</label>
+        <input type="password" class="form-control" [(ngModel)]="credentials.password" name="password" placeholder="••••••" required />
+      </div>
+
+      <div class="form-group" style="margin-bottom: 2rem;" *ngIf="!isLoginMode">
+        <label>Şifre Tekrar</label>
+        <input type="password" class="form-control" [(ngModel)]="credentials.confirmPassword" name="confirmPassword" placeholder="••••••" [required]="!isLoginMode" />
+      </div>
+
+      <div *ngIf="successMessage" class="alert alert-success" style="background: rgba(16, 185, 129, 0.2); color: #6ee7b7; border: 1px solid rgba(16, 185, 129, 0.4); padding: 0.75rem; border-radius: 8px; margin-bottom: 1rem; text-align: center; font-weight: 500;">
+        ✅ {{ successMessage }}
+      </div>
+
+      <div *ngIf="errorMessage" class="alert alert-danger" style="background: rgba(239, 68, 68, 0.2); color: #fca5a5; border: 1px solid rgba(239, 68, 68, 0.4); padding: 0.75rem; border-radius: 8px; margin-bottom: 1rem; text-align: center; font-weight: 500;">
+        ⚠️ {{ errorMessage }}
+      </div>
+
+      <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.75rem; font-size: 1rem; font-weight: 600;" [disabled]="isLoading">
+        {{ isLoading ? 'İşleniyor...' : (isLoginMode ? 'Giriş Yap 🔐' : 'Kayıt Ol 📝') }}
+      </button>
+    </form>
+  </div>
+</div>

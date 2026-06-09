@@ -1,0 +1,81 @@
+<div class="comparison-container animate-fade-in">
+  <div class="header-section">
+    <h2>Vade Senaryoları Karşılaştırma ⚖️</h2>
+    <p>Aynı kredi tutarı için 12, 24 ve 36 aylık geri ödeme senaryolarını anında kıyaslayın.</p>
+  </div>
+
+  <div class="glass-panel form-section">
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Kredi Türü</label>
+        <select class="form-control" [(ngModel)]="selectedProductId">
+          <option *ngFor="let p of products" [ngValue]="p.id">{{ p.name }} (%{{ p.interestRate }})</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Tutar (TL)</label>
+        <input type="number" class="form-control" [(ngModel)]="amount" />
+      </div>
+
+      <div class="button-group" style="display: flex; gap: 1rem;">
+        <button class="btn btn-compare" style="flex: 2;" (click)="compareScenarios()" [disabled]="isComparing">
+          {{ isComparing ? 'Yapay Zeka Analiz Ediyor...' : 'Senaryoları Kıyasla 🚀' }}
+        </button>
+        <button class="btn" style="flex: 1; background: rgba(239, 68, 68, 0.2); color: #fca5a5; border: 1px solid rgba(239, 68, 68, 0.3);" (click)="clearForm()" title="Formu Temizle">
+          Temizle 🧹
+        </button>
+      </div>
+    </div>
+    
+    <div *ngIf="error" class="error-msg">
+      {{ error }}
+    </div>
+  </div>
+
+  <div *ngIf="scenarioResults && scenarioResults.length > 0" class="results-section">
+    <h3 class="results-title">📊 Analiz Sonuçları</h3>
+    
+    <div class="cards-grid">
+      <div *ngFor="let scenario of scenarioResults; let i = index" 
+           class="scenario-card animate-slide-up" 
+           [ngStyle]="{'animation-delay': (i * 0.15) + 's'}">
+        
+        <div class="term-badge">
+          {{ scenario.term }} AY VADE
+        </div>
+        
+        <div class="card-content">
+          <h4 class="payment-title">Aylık Taksit</h4>
+          <div class="payment-amount">
+            {{ scenario.result.monthlyPayment }} TL
+          </div>
+          
+          <div class="detail-row">
+            <span>Toplam Vergi:</span>
+            <span class="text-warning">{{ scenario.result.totalTax || 0 }} TL</span>
+          </div>
+          
+          <div class="detail-row total-row">
+            <span>Toplam Geri Ödeme:</span>
+            <span class="text-bold">{{ scenario.result.totalPayment }} TL</span>
+          </div>
+          
+          <div class="ai-status">
+            <span class="badge" [ngClass]="{'badge-success': scenario.result.riskStatus === 'good', 'badge-danger': scenario.result.riskStatus === 'bad'}">
+              {{ scenario.result.riskStatus === 'good' ? '✅ DÜŞÜK RİSK' : '⚠️ YÜKSEK RİSK' }}
+            </span>
+          </div>
+
+          <div *ngIf="scenario.result.riskStatus === 'bad' && scenario.result.riskReasons && scenario.result.riskReasons.length > 0" class="ai-reason bad-reason">
+            {{ scenario.result.riskReasons[0] }}
+          </div>
+          
+          <div *ngIf="scenario.result.riskStatus === 'good' && scenario.result.riskReasons && scenario.result.riskReasons.length > 0" class="ai-reason good-reason">
+            Kredi Onay İhtimali Yüksek
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
