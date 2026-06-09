@@ -1,0 +1,6 @@
+@Vakifbankstajyer_HostAddress = http://localhost:5143
+
+GET {{Vakifbankstajyer_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,0 +1,1097 @@
+2026-05-22 16:41:39.554 +03:00 [INF] Starting web application
+2026-05-22 16:41:39.644 +03:00 [FTL] Application terminated unexpectedly
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at Program.<Main>$(String[] args) in C:\Users\genca\vakifbank\Vakifbankstajyer\Program.cs:line 44
+2026-05-22 16:41:45.733 +03:00 [INF] Starting web application
+2026-05-22 16:41:45.821 +03:00 [FTL] Application terminated unexpectedly
+Microsoft.Extensions.Hosting.HostAbortedException: The host was aborted.
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.ThrowHostAborted()
+   at Microsoft.Extensions.Hosting.HostFactoryResolver.HostingListener.OnNext(KeyValuePair`2 value)
+   at System.Diagnostics.DiagnosticListener.Write(String name, Object value)
+   at Microsoft.Extensions.Hosting.HostBuilder.ResolveHost(IServiceProvider serviceProvider, DiagnosticListener diagnosticListener)
+   at Microsoft.Extensions.Hosting.HostApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build()
+   at Program.<Main>$(String[] args) in C:\Users\genca\vakifbank\Vakifbankstajyer\Program.cs:line 44
+2026-05-22 16:42:21.871 +03:00 [INF] Starting web application
+2026-05-22 16:42:22.291 +03:00 [WRN] No store type was specified for the decimal property 'Amount' on entity type 'CalculationHistory'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-05-22 16:42:22.292 +03:00 [WRN] No store type was specified for the decimal property 'CalculatedMonthlyPayment' on entity type 'CalculationHistory'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-05-22 16:42:22.292 +03:00 [WRN] No store type was specified for the decimal property 'TotalPayment' on entity type 'CalculationHistory'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-05-22 16:42:22.292 +03:00 [WRN] No store type was specified for the decimal property 'InterestRate' on entity type 'Product'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-05-22 16:42:22.293 +03:00 [WRN] No store type was specified for the decimal property 'MaxAmount' on entity type 'Product'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2026-05-22 16:42:22.471 +03:00 [INF] Executed DbCommand (9ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-05-22 16:42:22.492 +03:00 [INF] Executed DbCommand (15ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2026-05-22 16:42:22.512 +03:00 [INF] Executed DbCommand (19ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+            IF EXISTS (SELECT * FROM sysobjects WHERE name='CreditApplications' and xtype='U')
+            BEGIN
+                DROP TABLE CreditApplications
+            END
+
+            CREATE TABLE CreditApplications (
+                Id INT PRIMARY KEY IDENTITY,
+                Email NVARCHAR(MAX),
+                NameSurname NVARCHAR(MAX),
+                BankName NVARCHAR(MAX),
+                LoanType NVARCHAR(MAX),
+                Amount DECIMAL(18,2) NOT NULL,
+                LoanTerm INT NOT NULL,
+                Status NVARCHAR(MAX) DEFAULT 'Beklemede',
+                RiskStatus NVARCHAR(MAX) DEFAULT '',
+                RiskScore REAL DEFAULT 0
+            )
+
+            IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='Users' and xtype='U')
+            BEGIN
+                CREATE TABLE Users (
+                    Id INT PRIMARY KEY IDENTITY,
+                    Username NVARCHAR(50) NOT NULL,
+                    Password NVARCHAR(MAX) NOT NULL,
+                    Role NVARCHAR(20) DEFAULT 'Banka Yetkilisi',
+                    CreatedAt DATETIME2 DEFAULT GETUTCDATE()
+                )
+            END
+2026-05-22 16:42:24.290 +03:00 [INF] ML Model trained successfully at startup.
+2026-05-22 16:42:24.353 +03:00 [INF] Now listening on: http://localhost:5143
+2026-05-22 16:42:24.354 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-05-22 16:42:24.354 +03:00 [INF] Hosting environment: Development
+2026-05-22 16:42:24.354 +03:00 [INF] Content root path: C:\Users\genca\vakifbank\Vakifbankstajyer
+2026-05-22 16:43:07.751 +03:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5143/api/auth/register - null null
+2026-05-22 16:43:07.792 +03:00 [INF] CORS policy execution successful.
+2026-05-22 16:43:07.799 +03:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5143/api/auth/register - 204 null null 50.2344ms
+2026-05-22 16:43:07.804 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5143/api/auth/register - application/json 63
+2026-05-22 16:43:07.809 +03:00 [INF] CORS policy execution successful.
+2026-05-22 16:43:07.816 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.AuthController.Register (Vakifbankstajyer)'
+2026-05-22 16:43:07.845 +03:00 [INF] Route matched with {action = "Register", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Register(Vakifbankstajyer.Controllers.LoginDto) on controller Vakifbankstajyer.Controllers.AuthController (Vakifbankstajyer).
+2026-05-22 16:43:08.162 +03:00 [INF] Executed DbCommand (19ms) [Parameters=[@__request_Username_0='?' (Size = 50)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[CreatedAt], [u].[Password], [u].[Role], [u].[Username]
+FROM [Users] AS [u]
+WHERE [u].[Username] = @__request_Username_0
+2026-05-22 16:43:08.289 +03:00 [INF] Executed DbCommand (9ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (Size = 4000), @p2='?' (Size = 20), @p3='?' (Size = 50)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Users] ([CreatedAt], [Password], [Role], [Username])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3);
+2026-05-22 16:43:08.323 +03:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType2`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-05-22 16:43:08.333 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.AuthController.Register (Vakifbankstajyer) in 484.3764ms
+2026-05-22 16:43:08.334 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.AuthController.Register (Vakifbankstajyer)'
+2026-05-22 16:43:08.341 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5143/api/auth/register - 200 null application/json; charset=utf-8 537.623ms
+2026-05-22 16:43:35.408 +03:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5143/api/auth/login - null null
+2026-05-22 16:43:35.411 +03:00 [INF] CORS policy execution successful.
+2026-05-22 16:43:35.411 +03:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5143/api/auth/login - 204 null null 3.6536ms
+2026-05-22 16:43:35.413 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5143/api/auth/login - application/json 63
+2026-05-22 16:43:35.413 +03:00 [INF] CORS policy execution successful.
+2026-05-22 16:43:35.413 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.AuthController.Login (Vakifbankstajyer)'
+2026-05-22 16:43:35.421 +03:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(Vakifbankstajyer.Controllers.LoginDto) on controller Vakifbankstajyer.Controllers.AuthController (Vakifbankstajyer).
+2026-05-22 16:43:35.537 +03:00 [INF] Executed DbCommand (10ms) [Parameters=[@__request_Username_0='?' (Size = 50), @__request_Password_1='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[CreatedAt], [u].[Password], [u].[Role], [u].[Username]
+FROM [Users] AS [u]
+WHERE [u].[Username] = @__request_Username_0 AND [u].[Password] = @__request_Password_1
+2026-05-22 16:43:35.547 +03:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType4`3[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-05-22 16:43:35.551 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.AuthController.Login (Vakifbankstajyer) in 129.3096ms
+2026-05-22 16:43:35.551 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.AuthController.Login (Vakifbankstajyer)'
+2026-05-22 16:43:35.552 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5143/api/auth/login - 200 null application/json; charset=utf-8 139.4444ms
+2026-05-22 16:43:36.580 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5143/api/applications/history - null null
+2026-05-22 16:43:36.582 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5143/api/analytics/dashboard - null null
+2026-05-22 16:43:36.587 +03:00 [INF] CORS policy execution successful.
+2026-05-22 16:43:36.587 +03:00 [INF] CORS policy execution successful.
+2026-05-22 16:43:36.587 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.AnalyticsController.GetDashboardStats (Vakifbankstajyer)'
+2026-05-22 16:43:36.587 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 16:43:36.589 +03:00 [INF] Route matched with {action = "GetDashboardStats", controller = "Analytics"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetDashboardStats() on controller Vakifbankstajyer.Controllers.AnalyticsController (Vakifbankstajyer).
+2026-05-22 16:43:36.590 +03:00 [INF] Route matched with {action = "GetHistory", controller = "Applications"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetHistory() on controller Vakifbankstajyer.Controllers.ApplicationsController (Vakifbankstajyer).
+2026-05-22 16:43:36.615 +03:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Amount], [c].[BankName], [c].[Email], [c].[LoanTerm], [c].[LoanType], [c].[NameSurname], [c].[RiskScore], [c].[RiskStatus], [c].[Status]
+FROM [CreditApplications] AS [c]
+ORDER BY [c].[Id] DESC
+2026-05-22 16:43:36.618 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Vakifbankstajyer.Entities.CreditApplication, Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-22 16:43:36.621 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Amount], [c].[BankName], [c].[Email], [c].[LoanTerm], [c].[LoanType], [c].[NameSurname], [c].[RiskScore], [c].[RiskStatus], [c].[Status]
+FROM [CreditApplications] AS [c]
+2026-05-22 16:43:36.637 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Age], [c].[Amount], [c].[CalculatedMonthlyPayment], [c].[CalculationDate], [c].[Housing], [c].[Job], [c].[ProductId], [c].[Purpose], [c].[RiskScore], [c].[RiskStatus], [c].[Sex], [c].[Term], [c].[TotalPayment]
+FROM [CalculationHistories] AS [c]
+2026-05-22 16:43:36.640 +03:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`9[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.List`1[[<>f__AnonymousType0`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[<>f__AnonymousType0`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]][], Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Double, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-05-22 16:43:36.658 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer) in 67.8867ms
+2026-05-22 16:43:36.658 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 16:43:36.659 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5143/api/applications/history - 200 null application/json; charset=utf-8 78.6726ms
+2026-05-22 16:43:36.674 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.AnalyticsController.GetDashboardStats (Vakifbankstajyer) in 84.4092ms
+2026-05-22 16:43:36.674 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.AnalyticsController.GetDashboardStats (Vakifbankstajyer)'
+2026-05-22 16:43:36.675 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5143/api/analytics/dashboard - 200 null application/json; charset=utf-8 92.9925ms
+2026-05-22 16:44:04.309 +03:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5143/api/auth/register - null null
+2026-05-22 16:44:04.309 +03:00 [INF] CORS policy execution successful.
+2026-05-22 16:44:04.310 +03:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5143/api/auth/register - 204 null null 0.8803ms
+2026-05-22 16:44:04.311 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5143/api/auth/register - application/json 74
+2026-05-22 16:44:04.311 +03:00 [INF] CORS policy execution successful.
+2026-05-22 16:44:04.311 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.AuthController.Register (Vakifbankstajyer)'
+2026-05-22 16:44:04.312 +03:00 [INF] Route matched with {action = "Register", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Register(Vakifbankstajyer.Controllers.LoginDto) on controller Vakifbankstajyer.Controllers.AuthController (Vakifbankstajyer).
+2026-05-22 16:44:04.320 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[@__request_Username_0='?' (Size = 50)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[CreatedAt], [u].[Password], [u].[Role], [u].[Username]
+FROM [Users] AS [u]
+WHERE [u].[Username] = @__request_Username_0
+2026-05-22 16:44:04.325 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (Size = 4000), @p2='?' (Size = 20), @p3='?' (Size = 50)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Users] ([CreatedAt], [Password], [Role], [Username])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3);
+2026-05-22 16:44:04.326 +03:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType2`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-05-22 16:44:04.326 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.AuthController.Register (Vakifbankstajyer) in 14.3745ms
+2026-05-22 16:44:04.326 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.AuthController.Register (Vakifbankstajyer)'
+2026-05-22 16:44:04.327 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5143/api/auth/register - 200 null application/json; charset=utf-8 15.8016ms
+2026-05-22 16:44:32.331 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5143/api/auth/register - application/json 61
+2026-05-22 16:44:32.331 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.AuthController.Register (Vakifbankstajyer)'
+2026-05-22 16:44:32.331 +03:00 [INF] Route matched with {action = "Register", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Register(Vakifbankstajyer.Controllers.LoginDto) on controller Vakifbankstajyer.Controllers.AuthController (Vakifbankstajyer).
+2026-05-22 16:44:32.340 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[@__request_Username_0='?' (Size = 50)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[CreatedAt], [u].[Password], [u].[Role], [u].[Username]
+FROM [Users] AS [u]
+WHERE [u].[Username] = @__request_Username_0
+2026-05-22 16:44:32.342 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (Size = 4000), @p2='?' (Size = 20), @p3='?' (Size = 50)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Users] ([CreatedAt], [Password], [Role], [Username])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3);
+2026-05-22 16:44:32.343 +03:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType2`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-05-22 16:44:32.343 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.AuthController.Register (Vakifbankstajyer) in 11.569ms
+2026-05-22 16:44:32.343 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.AuthController.Register (Vakifbankstajyer)'
+2026-05-22 16:44:32.343 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5143/api/auth/register - 200 null application/json; charset=utf-8 11.997ms
+2026-05-22 16:46:28.352 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5143/api/auth/login - application/json 37
+2026-05-22 16:46:28.352 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.AuthController.Login (Vakifbankstajyer)'
+2026-05-22 16:46:28.352 +03:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(Vakifbankstajyer.Controllers.LoginDto) on controller Vakifbankstajyer.Controllers.AuthController (Vakifbankstajyer).
+2026-05-22 16:46:28.356 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[@__request_Username_0='?' (Size = 50), @__request_Password_1='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[CreatedAt], [u].[Password], [u].[Role], [u].[Username]
+FROM [Users] AS [u]
+WHERE [u].[Username] = @__request_Username_0 AND [u].[Password] = @__request_Password_1
+2026-05-22 16:46:28.356 +03:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType4`3[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-05-22 16:46:28.356 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.AuthController.Login (Vakifbankstajyer) in 4.0008ms
+2026-05-22 16:46:28.356 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.AuthController.Login (Vakifbankstajyer)'
+2026-05-22 16:46:28.357 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5143/api/auth/login - 200 null application/json; charset=utf-8 4.4468ms
+2026-05-22 16:47:12.413 +03:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5143/api/auth/register - null null
+2026-05-22 16:47:12.413 +03:00 [INF] CORS policy execution successful.
+2026-05-22 16:47:12.414 +03:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5143/api/auth/register - 204 null null 0.5186ms
+2026-05-22 16:47:12.415 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5143/api/auth/register - application/json 64
+2026-05-22 16:47:12.415 +03:00 [INF] CORS policy execution successful.
+2026-05-22 16:47:12.415 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.AuthController.Register (Vakifbankstajyer)'
+2026-05-22 16:47:12.416 +03:00 [INF] Route matched with {action = "Register", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Register(Vakifbankstajyer.Controllers.LoginDto) on controller Vakifbankstajyer.Controllers.AuthController (Vakifbankstajyer).
+2026-05-22 16:47:12.421 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[@__request_Username_0='?' (Size = 50)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[CreatedAt], [u].[Password], [u].[Role], [u].[Username]
+FROM [Users] AS [u]
+WHERE [u].[Username] = @__request_Username_0
+2026-05-22 16:47:12.425 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[@p0='?' (DbType = DateTime2), @p1='?' (Size = 4000), @p2='?' (Size = 20), @p3='?' (Size = 50)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Users] ([CreatedAt], [Password], [Role], [Username])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3);
+2026-05-22 16:47:12.425 +03:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType2`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-05-22 16:47:12.426 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.AuthController.Register (Vakifbankstajyer) in 9.953ms
+2026-05-22 16:47:12.426 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.AuthController.Register (Vakifbankstajyer)'
+2026-05-22 16:47:12.426 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5143/api/auth/register - 200 null application/json; charset=utf-8 11.0309ms
+2026-05-22 16:47:18.331 +03:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5143/api/auth/login - null null
+2026-05-22 16:47:18.331 +03:00 [INF] CORS policy execution successful.
+2026-05-22 16:47:18.331 +03:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5143/api/auth/login - 204 null null 0.3676ms
+2026-05-22 16:47:18.332 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5143/api/auth/login - application/json 60
+2026-05-22 16:47:18.332 +03:00 [INF] CORS policy execution successful.
+2026-05-22 16:47:18.332 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.AuthController.Login (Vakifbankstajyer)'
+2026-05-22 16:47:18.332 +03:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(Vakifbankstajyer.Controllers.LoginDto) on controller Vakifbankstajyer.Controllers.AuthController (Vakifbankstajyer).
+2026-05-22 16:47:18.336 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[@__request_Username_0='?' (Size = 50), @__request_Password_1='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[CreatedAt], [u].[Password], [u].[Role], [u].[Username]
+FROM [Users] AS [u]
+WHERE [u].[Username] = @__request_Username_0 AND [u].[Password] = @__request_Password_1
+2026-05-22 16:47:18.336 +03:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType4`3[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-05-22 16:47:18.337 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.AuthController.Login (Vakifbankstajyer) in 4.1369ms
+2026-05-22 16:47:18.337 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.AuthController.Login (Vakifbankstajyer)'
+2026-05-22 16:47:18.337 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5143/api/auth/login - 200 null application/json; charset=utf-8 4.8135ms
+2026-05-22 16:47:19.359 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5143/api/applications/history - null null
+2026-05-22 16:47:19.360 +03:00 [INF] CORS policy execution successful.
+2026-05-22 16:47:19.361 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 16:47:19.361 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5143/api/analytics/dashboard - null null
+2026-05-22 16:47:19.361 +03:00 [INF] Route matched with {action = "GetHistory", controller = "Applications"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetHistory() on controller Vakifbankstajyer.Controllers.ApplicationsController (Vakifbankstajyer).
+2026-05-22 16:47:19.361 +03:00 [INF] CORS policy execution successful.
+2026-05-22 16:47:19.362 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.AnalyticsController.GetDashboardStats (Vakifbankstajyer)'
+2026-05-22 16:47:19.362 +03:00 [INF] Route matched with {action = "GetDashboardStats", controller = "Analytics"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetDashboardStats() on controller Vakifbankstajyer.Controllers.AnalyticsController (Vakifbankstajyer).
+2026-05-22 16:47:19.367 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Amount], [c].[BankName], [c].[Email], [c].[LoanTerm], [c].[LoanType], [c].[NameSurname], [c].[RiskScore], [c].[RiskStatus], [c].[Status]
+FROM [CreditApplications] AS [c]
+2026-05-22 16:47:19.368 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Amount], [c].[BankName], [c].[Email], [c].[LoanTerm], [c].[LoanType], [c].[NameSurname], [c].[RiskScore], [c].[RiskStatus], [c].[Status]
+FROM [CreditApplications] AS [c]
+ORDER BY [c].[Id] DESC
+2026-05-22 16:47:19.368 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Vakifbankstajyer.Entities.CreditApplication, Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-22 16:47:19.369 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer) in 7.6951ms
+2026-05-22 16:47:19.369 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 16:47:19.369 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5143/api/applications/history - 200 null application/json; charset=utf-8 10.6828ms
+2026-05-22 16:47:19.372 +03:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Age], [c].[Amount], [c].[CalculatedMonthlyPayment], [c].[CalculationDate], [c].[Housing], [c].[Job], [c].[ProductId], [c].[Purpose], [c].[RiskScore], [c].[RiskStatus], [c].[Sex], [c].[Term], [c].[TotalPayment]
+FROM [CalculationHistories] AS [c]
+2026-05-22 16:47:19.372 +03:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`9[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.List`1[[<>f__AnonymousType0`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[<>f__AnonymousType0`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]][], Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Double, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-05-22 16:47:19.373 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.AnalyticsController.GetDashboardStats (Vakifbankstajyer) in 10.1773ms
+2026-05-22 16:47:19.373 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.AnalyticsController.GetDashboardStats (Vakifbankstajyer)'
+2026-05-22 16:47:19.373 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5143/api/analytics/dashboard - 200 null application/json; charset=utf-8 12.2375ms
+2026-05-22 16:47:23.769 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5143/api/calculations/history - null null
+2026-05-22 16:47:23.770 +03:00 [INF] CORS policy execution successful.
+2026-05-22 16:47:23.770 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.CalculationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 16:47:23.770 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5143/api/applications/history - null null
+2026-05-22 16:47:23.770 +03:00 [INF] CORS policy execution successful.
+2026-05-22 16:47:23.770 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 16:47:23.770 +03:00 [INF] Route matched with {action = "GetHistory", controller = "Applications"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetHistory() on controller Vakifbankstajyer.Controllers.ApplicationsController (Vakifbankstajyer).
+2026-05-22 16:47:23.773 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Amount], [c].[BankName], [c].[Email], [c].[LoanTerm], [c].[LoanType], [c].[NameSurname], [c].[RiskScore], [c].[RiskStatus], [c].[Status]
+FROM [CreditApplications] AS [c]
+ORDER BY [c].[Id] DESC
+2026-05-22 16:47:23.773 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Vakifbankstajyer.Entities.CreditApplication, Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-22 16:47:23.773 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer) in 2.772ms
+2026-05-22 16:47:23.773 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 16:47:23.774 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5143/api/applications/history - 200 null application/json; charset=utf-8 3.6579ms
+2026-05-22 16:47:23.777 +03:00 [INF] Route matched with {action = "GetHistory", controller = "Calculations"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[Vakifbankstajyer.Entities.CalculationHistory]]] GetHistory() on controller Vakifbankstajyer.Controllers.CalculationsController (Vakifbankstajyer).
+2026-05-22 16:47:23.892 +03:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Age], [c].[Amount], [c].[CalculatedMonthlyPayment], [c].[CalculationDate], [c].[Housing], [c].[Job], [c].[ProductId], [c].[Purpose], [c].[RiskScore], [c].[RiskStatus], [c].[Sex], [c].[Term], [c].[TotalPayment], [p].[Id], [p].[InterestRate], [p].[MaxAmount], [p].[MaxTerm], [p].[MinAmount], [p].[MinTerm], [p].[Name]
+FROM [CalculationHistories] AS [c]
+INNER JOIN [Products] AS [p] ON [c].[ProductId] = [p].[Id]
+ORDER BY [c].[CalculationDate] DESC
+2026-05-22 16:47:23.895 +03:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[Vakifbankstajyer.Entities.CalculationHistory, Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-22 16:47:23.903 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.CalculationsController.GetHistory (Vakifbankstajyer) in 125.2018ms
+2026-05-22 16:47:23.903 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.CalculationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 16:47:23.903 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5143/api/calculations/history - 200 null application/json; charset=utf-8 133.6189ms
+2026-05-22 16:47:26.250 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5143/api/products - null null
+2026-05-22 16:47:26.250 +03:00 [INF] CORS policy execution successful.
+2026-05-22 16:47:26.250 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.ProductsController.GetProducts (Vakifbankstajyer)'
+2026-05-22 16:47:26.257 +03:00 [INF] Route matched with {action = "GetProducts", controller = "Products"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[Vakifbankstajyer.Entities.Product]]] GetProducts() on controller Vakifbankstajyer.Controllers.ProductsController (Vakifbankstajyer).
+2026-05-22 16:47:26.271 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p].[InterestRate], [p].[MaxAmount], [p].[MaxTerm], [p].[MinAmount], [p].[MinTerm], [p].[Name]
+FROM [Products] AS [p]
+2026-05-22 16:47:26.309 +03:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[Vakifbankstajyer.Entities.Product, Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-22 16:47:26.315 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.ProductsController.GetProducts (Vakifbankstajyer) in 58.2258ms
+2026-05-22 16:47:26.315 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.ProductsController.GetProducts (Vakifbankstajyer)'
+2026-05-22 16:47:26.315 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5143/api/products - 200 null application/json; charset=utf-8 65.4272ms
+2026-05-22 16:47:26.844 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5143/api/applications/history - null null
+2026-05-22 16:47:26.845 +03:00 [INF] CORS policy execution successful.
+2026-05-22 16:47:26.845 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5143/api/analytics/dashboard - null null
+2026-05-22 16:47:26.845 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 16:47:26.845 +03:00 [INF] CORS policy execution successful.
+2026-05-22 16:47:26.845 +03:00 [INF] Route matched with {action = "GetHistory", controller = "Applications"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetHistory() on controller Vakifbankstajyer.Controllers.ApplicationsController (Vakifbankstajyer).
+2026-05-22 16:47:26.845 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.AnalyticsController.GetDashboardStats (Vakifbankstajyer)'
+2026-05-22 16:47:26.846 +03:00 [INF] Route matched with {action = "GetDashboardStats", controller = "Analytics"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetDashboardStats() on controller Vakifbankstajyer.Controllers.AnalyticsController (Vakifbankstajyer).
+2026-05-22 16:47:26.848 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Amount], [c].[BankName], [c].[Email], [c].[LoanTerm], [c].[LoanType], [c].[NameSurname], [c].[RiskScore], [c].[RiskStatus], [c].[Status]
+FROM [CreditApplications] AS [c]
+ORDER BY [c].[Id] DESC
+2026-05-22 16:47:26.848 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Amount], [c].[BankName], [c].[Email], [c].[LoanTerm], [c].[LoanType], [c].[NameSurname], [c].[RiskScore], [c].[RiskStatus], [c].[Status]
+FROM [CreditApplications] AS [c]
+2026-05-22 16:47:26.848 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Vakifbankstajyer.Entities.CreditApplication, Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-22 16:47:26.849 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer) in 2.9989ms
+2026-05-22 16:47:26.849 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 16:47:26.849 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5143/api/applications/history - 200 null application/json; charset=utf-8 4.4731ms
+2026-05-22 16:47:26.849 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Age], [c].[Amount], [c].[CalculatedMonthlyPayment], [c].[CalculationDate], [c].[Housing], [c].[Job], [c].[ProductId], [c].[Purpose], [c].[RiskScore], [c].[RiskStatus], [c].[Sex], [c].[Term], [c].[TotalPayment]
+FROM [CalculationHistories] AS [c]
+2026-05-22 16:47:26.849 +03:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`9[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.List`1[[<>f__AnonymousType0`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[<>f__AnonymousType0`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]][], Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Double, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-05-22 16:47:26.850 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.AnalyticsController.GetDashboardStats (Vakifbankstajyer) in 3.9985ms
+2026-05-22 16:47:26.850 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.AnalyticsController.GetDashboardStats (Vakifbankstajyer)'
+2026-05-22 16:47:26.850 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5143/api/analytics/dashboard - 200 null application/json; charset=utf-8 5.0064ms
+2026-05-22 16:50:55.052 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5143/api/products - null null
+2026-05-22 16:50:55.052 +03:00 [INF] CORS policy execution successful.
+2026-05-22 16:50:55.052 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.ProductsController.GetProducts (Vakifbankstajyer)'
+2026-05-22 16:50:55.053 +03:00 [INF] Route matched with {action = "GetProducts", controller = "Products"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[Vakifbankstajyer.Entities.Product]]] GetProducts() on controller Vakifbankstajyer.Controllers.ProductsController (Vakifbankstajyer).
+2026-05-22 16:50:55.058 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p].[InterestRate], [p].[MaxAmount], [p].[MaxTerm], [p].[MinAmount], [p].[MinTerm], [p].[Name]
+FROM [Products] AS [p]
+2026-05-22 16:50:55.058 +03:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[Vakifbankstajyer.Entities.Product, Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-22 16:50:55.059 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.ProductsController.GetProducts (Vakifbankstajyer) in 5.8855ms
+2026-05-22 16:50:55.059 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.ProductsController.GetProducts (Vakifbankstajyer)'
+2026-05-22 16:50:55.059 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5143/api/products - 200 null application/json; charset=utf-8 7.0239ms
+2026-05-22 16:50:56.339 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5143/api/calculations/history - null null
+2026-05-22 16:50:56.340 +03:00 [INF] CORS policy execution successful.
+2026-05-22 16:50:56.341 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.CalculationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 16:50:56.341 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5143/api/applications/history - null null
+2026-05-22 16:50:56.341 +03:00 [INF] Route matched with {action = "GetHistory", controller = "Calculations"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[Vakifbankstajyer.Entities.CalculationHistory]]] GetHistory() on controller Vakifbankstajyer.Controllers.CalculationsController (Vakifbankstajyer).
+2026-05-22 16:50:56.341 +03:00 [INF] CORS policy execution successful.
+2026-05-22 16:50:56.341 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 16:50:56.341 +03:00 [INF] Route matched with {action = "GetHistory", controller = "Applications"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetHistory() on controller Vakifbankstajyer.Controllers.ApplicationsController (Vakifbankstajyer).
+2026-05-22 16:50:56.345 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Amount], [c].[BankName], [c].[Email], [c].[LoanTerm], [c].[LoanType], [c].[NameSurname], [c].[RiskScore], [c].[RiskStatus], [c].[Status]
+FROM [CreditApplications] AS [c]
+ORDER BY [c].[Id] DESC
+2026-05-22 16:50:56.345 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Vakifbankstajyer.Entities.CreditApplication, Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-22 16:50:56.345 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer) in 4.2645ms
+2026-05-22 16:50:56.346 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 16:50:56.346 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5143/api/applications/history - 200 null application/json; charset=utf-8 5.0127ms
+2026-05-22 16:50:56.347 +03:00 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Age], [c].[Amount], [c].[CalculatedMonthlyPayment], [c].[CalculationDate], [c].[Housing], [c].[Job], [c].[ProductId], [c].[Purpose], [c].[RiskScore], [c].[RiskStatus], [c].[Sex], [c].[Term], [c].[TotalPayment], [p].[Id], [p].[InterestRate], [p].[MaxAmount], [p].[MaxTerm], [p].[MinAmount], [p].[MinTerm], [p].[Name]
+FROM [CalculationHistories] AS [c]
+INNER JOIN [Products] AS [p] ON [c].[ProductId] = [p].[Id]
+ORDER BY [c].[CalculationDate] DESC
+2026-05-22 16:50:56.347 +03:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[Vakifbankstajyer.Entities.CalculationHistory, Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-22 16:50:56.348 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.CalculationsController.GetHistory (Vakifbankstajyer) in 6.8396ms
+2026-05-22 16:50:56.348 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.CalculationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 16:50:56.348 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5143/api/calculations/history - 200 null application/json; charset=utf-8 9.1681ms
+2026-05-22 16:50:58.457 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5143/api/calculations/history - null null
+2026-05-22 16:50:58.458 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5143/api/applications/history - null null
+2026-05-22 16:50:58.458 +03:00 [INF] CORS policy execution successful.
+2026-05-22 16:50:58.458 +03:00 [INF] CORS policy execution successful.
+2026-05-22 16:50:58.458 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.CalculationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 16:50:58.458 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 16:50:58.458 +03:00 [INF] Route matched with {action = "GetHistory", controller = "Calculations"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[Vakifbankstajyer.Entities.CalculationHistory]]] GetHistory() on controller Vakifbankstajyer.Controllers.CalculationsController (Vakifbankstajyer).
+2026-05-22 16:50:58.458 +03:00 [INF] Route matched with {action = "GetHistory", controller = "Applications"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetHistory() on controller Vakifbankstajyer.Controllers.ApplicationsController (Vakifbankstajyer).
+2026-05-22 16:50:58.460 +03:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Amount], [c].[BankName], [c].[Email], [c].[LoanTerm], [c].[LoanType], [c].[NameSurname], [c].[RiskScore], [c].[RiskStatus], [c].[Status]
+FROM [CreditApplications] AS [c]
+ORDER BY [c].[Id] DESC
+2026-05-22 16:50:58.460 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Vakifbankstajyer.Entities.CreditApplication, Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-22 16:50:58.460 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer) in 2.0569ms
+2026-05-22 16:50:58.460 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 16:50:58.461 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5143/api/applications/history - 200 null application/json; charset=utf-8 2.9059ms
+2026-05-22 16:50:58.462 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Age], [c].[Amount], [c].[CalculatedMonthlyPayment], [c].[CalculationDate], [c].[Housing], [c].[Job], [c].[ProductId], [c].[Purpose], [c].[RiskScore], [c].[RiskStatus], [c].[Sex], [c].[Term], [c].[TotalPayment], [p].[Id], [p].[InterestRate], [p].[MaxAmount], [p].[MaxTerm], [p].[MinAmount], [p].[MinTerm], [p].[Name]
+FROM [CalculationHistories] AS [c]
+INNER JOIN [Products] AS [p] ON [c].[ProductId] = [p].[Id]
+ORDER BY [c].[CalculationDate] DESC
+2026-05-22 16:50:58.462 +03:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[Vakifbankstajyer.Entities.CalculationHistory, Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-22 16:50:58.462 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.CalculationsController.GetHistory (Vakifbankstajyer) in 4.3679ms
+2026-05-22 16:50:58.463 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.CalculationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 16:50:58.463 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5143/api/calculations/history - 200 null application/json; charset=utf-8 5.2616ms
+2026-05-22 16:50:59.347 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5143/api/products - null null
+2026-05-22 16:50:59.347 +03:00 [INF] CORS policy execution successful.
+2026-05-22 16:50:59.347 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.ProductsController.GetProducts (Vakifbankstajyer)'
+2026-05-22 16:50:59.347 +03:00 [INF] Route matched with {action = "GetProducts", controller = "Products"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[Vakifbankstajyer.Entities.Product]]] GetProducts() on controller Vakifbankstajyer.Controllers.ProductsController (Vakifbankstajyer).
+2026-05-22 16:50:59.349 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p].[InterestRate], [p].[MaxAmount], [p].[MaxTerm], [p].[MinAmount], [p].[MinTerm], [p].[Name]
+FROM [Products] AS [p]
+2026-05-22 16:50:59.350 +03:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[Vakifbankstajyer.Entities.Product, Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-22 16:50:59.350 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.ProductsController.GetProducts (Vakifbankstajyer) in 2.6577ms
+2026-05-22 16:50:59.350 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.ProductsController.GetProducts (Vakifbankstajyer)'
+2026-05-22 16:50:59.350 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5143/api/products - 200 null application/json; charset=utf-8 3.34ms
+2026-05-22 16:50:59.756 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5143/api/products - null null
+2026-05-22 16:50:59.756 +03:00 [INF] CORS policy execution successful.
+2026-05-22 16:50:59.756 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.ProductsController.GetProducts (Vakifbankstajyer)'
+2026-05-22 16:50:59.756 +03:00 [INF] Route matched with {action = "GetProducts", controller = "Products"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[Vakifbankstajyer.Entities.Product]]] GetProducts() on controller Vakifbankstajyer.Controllers.ProductsController (Vakifbankstajyer).
+2026-05-22 16:50:59.758 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p].[InterestRate], [p].[MaxAmount], [p].[MaxTerm], [p].[MinAmount], [p].[MinTerm], [p].[Name]
+FROM [Products] AS [p]
+2026-05-22 16:50:59.758 +03:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[Vakifbankstajyer.Entities.Product, Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-22 16:50:59.759 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.ProductsController.GetProducts (Vakifbankstajyer) in 2.8426ms
+2026-05-22 16:50:59.759 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.ProductsController.GetProducts (Vakifbankstajyer)'
+2026-05-22 16:50:59.759 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5143/api/products - 200 null application/json; charset=utf-8 3.5115ms
+2026-05-22 16:51:04.380 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5143/api/calculations/history - null null
+2026-05-22 16:51:04.380 +03:00 [INF] CORS policy execution successful.
+2026-05-22 16:51:04.380 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.CalculationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 16:51:04.381 +03:00 [INF] Route matched with {action = "GetHistory", controller = "Calculations"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[Vakifbankstajyer.Entities.CalculationHistory]]] GetHistory() on controller Vakifbankstajyer.Controllers.CalculationsController (Vakifbankstajyer).
+2026-05-22 16:51:04.381 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5143/api/applications/history - null null
+2026-05-22 16:51:04.381 +03:00 [INF] CORS policy execution successful.
+2026-05-22 16:51:04.382 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 16:51:04.382 +03:00 [INF] Route matched with {action = "GetHistory", controller = "Applications"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetHistory() on controller Vakifbankstajyer.Controllers.ApplicationsController (Vakifbankstajyer).
+2026-05-22 16:51:04.383 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Age], [c].[Amount], [c].[CalculatedMonthlyPayment], [c].[CalculationDate], [c].[Housing], [c].[Job], [c].[ProductId], [c].[Purpose], [c].[RiskScore], [c].[RiskStatus], [c].[Sex], [c].[Term], [c].[TotalPayment], [p].[Id], [p].[InterestRate], [p].[MaxAmount], [p].[MaxTerm], [p].[MinAmount], [p].[MinTerm], [p].[Name]
+FROM [CalculationHistories] AS [c]
+INNER JOIN [Products] AS [p] ON [c].[ProductId] = [p].[Id]
+ORDER BY [c].[CalculationDate] DESC
+2026-05-22 16:51:04.383 +03:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Amount], [c].[BankName], [c].[Email], [c].[LoanTerm], [c].[LoanType], [c].[NameSurname], [c].[RiskScore], [c].[RiskStatus], [c].[Status]
+FROM [CreditApplications] AS [c]
+ORDER BY [c].[Id] DESC
+2026-05-22 16:51:04.383 +03:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[Vakifbankstajyer.Entities.CalculationHistory, Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-22 16:51:04.384 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Vakifbankstajyer.Entities.CreditApplication, Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-22 16:51:04.384 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.CalculationsController.GetHistory (Vakifbankstajyer) in 3.0536ms
+2026-05-22 16:51:04.384 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer) in 2.0023ms
+2026-05-22 16:51:04.384 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.CalculationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 16:51:04.384 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 16:51:04.384 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5143/api/applications/history - 200 null application/json; charset=utf-8 2.8308ms
+2026-05-22 16:51:04.384 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5143/api/calculations/history - 200 null application/json; charset=utf-8 4.0112ms
+2026-05-22 16:51:05.434 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5143/api/products - null null
+2026-05-22 16:51:05.434 +03:00 [INF] CORS policy execution successful.
+2026-05-22 16:51:05.435 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.ProductsController.GetProducts (Vakifbankstajyer)'
+2026-05-22 16:51:05.435 +03:00 [INF] Route matched with {action = "GetProducts", controller = "Products"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[Vakifbankstajyer.Entities.Product]]] GetProducts() on controller Vakifbankstajyer.Controllers.ProductsController (Vakifbankstajyer).
+2026-05-22 16:51:05.436 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p].[InterestRate], [p].[MaxAmount], [p].[MaxTerm], [p].[MinAmount], [p].[MinTerm], [p].[Name]
+FROM [Products] AS [p]
+2026-05-22 16:51:05.437 +03:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[Vakifbankstajyer.Entities.Product, Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-22 16:51:05.438 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.ProductsController.GetProducts (Vakifbankstajyer) in 2.9661ms
+2026-05-22 16:51:05.438 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.ProductsController.GetProducts (Vakifbankstajyer)'
+2026-05-22 16:51:05.438 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5143/api/products - 200 null application/json; charset=utf-8 3.9103ms
+2026-05-22 16:51:05.781 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5143/api/products - null null
+2026-05-22 16:51:05.782 +03:00 [INF] CORS policy execution successful.
+2026-05-22 16:51:05.782 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.ProductsController.GetProducts (Vakifbankstajyer)'
+2026-05-22 16:51:05.782 +03:00 [INF] Route matched with {action = "GetProducts", controller = "Products"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[Vakifbankstajyer.Entities.Product]]] GetProducts() on controller Vakifbankstajyer.Controllers.ProductsController (Vakifbankstajyer).
+2026-05-22 16:51:05.784 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p].[InterestRate], [p].[MaxAmount], [p].[MaxTerm], [p].[MinAmount], [p].[MinTerm], [p].[Name]
+FROM [Products] AS [p]
+2026-05-22 16:51:05.785 +03:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[Vakifbankstajyer.Entities.Product, Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-22 16:51:05.785 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.ProductsController.GetProducts (Vakifbankstajyer) in 2.9416ms
+2026-05-22 16:51:05.785 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.ProductsController.GetProducts (Vakifbankstajyer)'
+2026-05-22 16:51:05.785 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5143/api/products - 200 null application/json; charset=utf-8 4.1166ms
+2026-05-22 17:10:23.622 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5143/api/products - null null
+2026-05-22 17:10:23.623 +03:00 [INF] CORS policy execution successful.
+2026-05-22 17:10:23.623 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.ProductsController.GetProducts (Vakifbankstajyer)'
+2026-05-22 17:10:23.623 +03:00 [INF] Route matched with {action = "GetProducts", controller = "Products"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[Vakifbankstajyer.Entities.Product]]] GetProducts() on controller Vakifbankstajyer.Controllers.ProductsController (Vakifbankstajyer).
+2026-05-22 17:10:23.637 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p].[InterestRate], [p].[MaxAmount], [p].[MaxTerm], [p].[MinAmount], [p].[MinTerm], [p].[Name]
+FROM [Products] AS [p]
+2026-05-22 17:10:23.637 +03:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[Vakifbankstajyer.Entities.Product, Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-22 17:10:23.637 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.ProductsController.GetProducts (Vakifbankstajyer) in 14.0605ms
+2026-05-22 17:10:23.637 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.ProductsController.GetProducts (Vakifbankstajyer)'
+2026-05-22 17:10:23.637 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5143/api/products - 200 null application/json; charset=utf-8 15.0491ms
+2026-05-22 17:10:30.077 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5143/api/products - null null
+2026-05-22 17:10:30.077 +03:00 [INF] CORS policy execution successful.
+2026-05-22 17:10:30.077 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.ProductsController.GetProducts (Vakifbankstajyer)'
+2026-05-22 17:10:30.077 +03:00 [INF] Route matched with {action = "GetProducts", controller = "Products"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[Vakifbankstajyer.Entities.Product]]] GetProducts() on controller Vakifbankstajyer.Controllers.ProductsController (Vakifbankstajyer).
+2026-05-22 17:10:30.078 +03:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p].[InterestRate], [p].[MaxAmount], [p].[MaxTerm], [p].[MinAmount], [p].[MinTerm], [p].[Name]
+FROM [Products] AS [p]
+2026-05-22 17:10:30.079 +03:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[Vakifbankstajyer.Entities.Product, Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-22 17:10:30.079 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.ProductsController.GetProducts (Vakifbankstajyer) in 1.5977ms
+2026-05-22 17:10:30.079 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.ProductsController.GetProducts (Vakifbankstajyer)'
+2026-05-22 17:10:30.079 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5143/api/products - 200 null application/json; charset=utf-8 2.1566ms
+2026-05-22 17:10:39.415 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5143/api/products - null null
+2026-05-22 17:10:39.416 +03:00 [INF] CORS policy execution successful.
+2026-05-22 17:10:39.416 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.ProductsController.GetProducts (Vakifbankstajyer)'
+2026-05-22 17:10:39.416 +03:00 [INF] Route matched with {action = "GetProducts", controller = "Products"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[Vakifbankstajyer.Entities.Product]]] GetProducts() on controller Vakifbankstajyer.Controllers.ProductsController (Vakifbankstajyer).
+2026-05-22 17:10:39.419 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p].[InterestRate], [p].[MaxAmount], [p].[MaxTerm], [p].[MinAmount], [p].[MinTerm], [p].[Name]
+FROM [Products] AS [p]
+2026-05-22 17:10:39.419 +03:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[Vakifbankstajyer.Entities.Product, Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-22 17:10:39.419 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.ProductsController.GetProducts (Vakifbankstajyer) in 3.0313ms
+2026-05-22 17:10:39.419 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.ProductsController.GetProducts (Vakifbankstajyer)'
+2026-05-22 17:10:39.419 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5143/api/products - 200 null application/json; charset=utf-8 3.7258ms
+2026-05-22 17:14:05.480 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5143/api/products - null null
+2026-05-22 17:14:05.480 +03:00 [INF] CORS policy execution successful.
+2026-05-22 17:14:05.480 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.ProductsController.GetProducts (Vakifbankstajyer)'
+2026-05-22 17:14:05.480 +03:00 [INF] Route matched with {action = "GetProducts", controller = "Products"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[Vakifbankstajyer.Entities.Product]]] GetProducts() on controller Vakifbankstajyer.Controllers.ProductsController (Vakifbankstajyer).
+2026-05-22 17:14:05.483 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p].[InterestRate], [p].[MaxAmount], [p].[MaxTerm], [p].[MinAmount], [p].[MinTerm], [p].[Name]
+FROM [Products] AS [p]
+2026-05-22 17:14:05.484 +03:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[Vakifbankstajyer.Entities.Product, Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-22 17:14:05.484 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.ProductsController.GetProducts (Vakifbankstajyer) in 3.5835ms
+2026-05-22 17:14:05.484 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.ProductsController.GetProducts (Vakifbankstajyer)'
+2026-05-22 17:14:05.484 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5143/api/products - 200 null application/json; charset=utf-8 4.3413ms
+2026-05-22 17:16:15.910 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5143/api/calculations/history - null null
+2026-05-22 17:16:15.910 +03:00 [INF] CORS policy execution successful.
+2026-05-22 17:16:15.910 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.CalculationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 17:16:15.910 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5143/api/applications/history - null null
+2026-05-22 17:16:15.911 +03:00 [INF] Route matched with {action = "GetHistory", controller = "Calculations"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[Vakifbankstajyer.Entities.CalculationHistory]]] GetHistory() on controller Vakifbankstajyer.Controllers.CalculationsController (Vakifbankstajyer).
+2026-05-22 17:16:15.911 +03:00 [INF] CORS policy execution successful.
+2026-05-22 17:16:15.911 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 17:16:15.911 +03:00 [INF] Route matched with {action = "GetHistory", controller = "Applications"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetHistory() on controller Vakifbankstajyer.Controllers.ApplicationsController (Vakifbankstajyer).
+2026-05-22 17:16:15.917 +03:00 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Age], [c].[Amount], [c].[CalculatedMonthlyPayment], [c].[CalculationDate], [c].[Housing], [c].[Job], [c].[ProductId], [c].[Purpose], [c].[RiskScore], [c].[RiskStatus], [c].[Sex], [c].[Term], [c].[TotalPayment], [p].[Id], [p].[InterestRate], [p].[MaxAmount], [p].[MaxTerm], [p].[MinAmount], [p].[MinTerm], [p].[Name]
+FROM [CalculationHistories] AS [c]
+INNER JOIN [Products] AS [p] ON [c].[ProductId] = [p].[Id]
+ORDER BY [c].[CalculationDate] DESC
+2026-05-22 17:16:15.918 +03:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[Vakifbankstajyer.Entities.CalculationHistory, Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-22 17:16:15.918 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.CalculationsController.GetHistory (Vakifbankstajyer) in 7.2004ms
+2026-05-22 17:16:15.918 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.CalculationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 17:16:15.918 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5143/api/calculations/history - 200 null application/json; charset=utf-8 8.2343ms
+2026-05-22 17:16:15.920 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Amount], [c].[BankName], [c].[Email], [c].[LoanTerm], [c].[LoanType], [c].[NameSurname], [c].[RiskScore], [c].[RiskStatus], [c].[Status]
+FROM [CreditApplications] AS [c]
+ORDER BY [c].[Id] DESC
+2026-05-22 17:16:15.921 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Vakifbankstajyer.Entities.CreditApplication, Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-22 17:16:15.921 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer) in 9.8561ms
+2026-05-22 17:16:15.921 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 17:16:15.921 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5143/api/applications/history - 200 null application/json; charset=utf-8 10.8177ms
+2026-05-22 17:18:08.040 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5143/api/calculations/history - null null
+2026-05-22 17:18:08.041 +03:00 [INF] CORS policy execution successful.
+2026-05-22 17:18:08.041 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.CalculationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 17:18:08.041 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5143/api/applications/history - null null
+2026-05-22 17:18:08.041 +03:00 [INF] Route matched with {action = "GetHistory", controller = "Calculations"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[Vakifbankstajyer.Entities.CalculationHistory]]] GetHistory() on controller Vakifbankstajyer.Controllers.CalculationsController (Vakifbankstajyer).
+2026-05-22 17:18:08.041 +03:00 [INF] CORS policy execution successful.
+2026-05-22 17:18:08.041 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 17:18:08.041 +03:00 [INF] Route matched with {action = "GetHistory", controller = "Applications"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetHistory() on controller Vakifbankstajyer.Controllers.ApplicationsController (Vakifbankstajyer).
+2026-05-22 17:18:08.045 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Amount], [c].[BankName], [c].[Email], [c].[LoanTerm], [c].[LoanType], [c].[NameSurname], [c].[RiskScore], [c].[RiskStatus], [c].[Status]
+FROM [CreditApplications] AS [c]
+ORDER BY [c].[Id] DESC
+2026-05-22 17:18:08.046 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Vakifbankstajyer.Entities.CreditApplication, Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-22 17:18:08.046 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer) in 4.672ms
+2026-05-22 17:18:08.046 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 17:18:08.046 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5143/api/applications/history - 200 null application/json; charset=utf-8 5.43ms
+2026-05-22 17:18:08.047 +03:00 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Age], [c].[Amount], [c].[CalculatedMonthlyPayment], [c].[CalculationDate], [c].[Housing], [c].[Job], [c].[ProductId], [c].[Purpose], [c].[RiskScore], [c].[RiskStatus], [c].[Sex], [c].[Term], [c].[TotalPayment], [p].[Id], [p].[InterestRate], [p].[MaxAmount], [p].[MaxTerm], [p].[MinAmount], [p].[MinTerm], [p].[Name]
+FROM [CalculationHistories] AS [c]
+INNER JOIN [Products] AS [p] ON [c].[ProductId] = [p].[Id]
+ORDER BY [c].[CalculationDate] DESC
+2026-05-22 17:18:08.048 +03:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[Vakifbankstajyer.Entities.CalculationHistory, Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-22 17:18:08.048 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.CalculationsController.GetHistory (Vakifbankstajyer) in 6.7058ms
+2026-05-22 17:18:08.048 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.CalculationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 17:18:08.048 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5143/api/calculations/history - 200 null application/json; charset=utf-8 7.697ms
+2026-05-22 17:18:27.001 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5143/api/products - null null
+2026-05-22 17:18:27.002 +03:00 [INF] CORS policy execution successful.
+2026-05-22 17:18:27.002 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.ProductsController.GetProducts (Vakifbankstajyer)'
+2026-05-22 17:18:27.002 +03:00 [INF] Route matched with {action = "GetProducts", controller = "Products"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[Vakifbankstajyer.Entities.Product]]] GetProducts() on controller Vakifbankstajyer.Controllers.ProductsController (Vakifbankstajyer).
+2026-05-22 17:18:27.006 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p].[InterestRate], [p].[MaxAmount], [p].[MaxTerm], [p].[MinAmount], [p].[MinTerm], [p].[Name]
+FROM [Products] AS [p]
+2026-05-22 17:18:27.006 +03:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[Vakifbankstajyer.Entities.Product, Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-22 17:18:27.006 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.ProductsController.GetProducts (Vakifbankstajyer) in 4.4476ms
+2026-05-22 17:18:27.006 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.ProductsController.GetProducts (Vakifbankstajyer)'
+2026-05-22 17:18:27.006 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5143/api/products - 200 null application/json; charset=utf-8 5.3969ms
+2026-05-22 17:18:42.543 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5143/api/products - null null
+2026-05-22 17:18:42.543 +03:00 [INF] CORS policy execution successful.
+2026-05-22 17:18:42.543 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.ProductsController.GetProducts (Vakifbankstajyer)'
+2026-05-22 17:18:42.544 +03:00 [INF] Route matched with {action = "GetProducts", controller = "Products"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[Vakifbankstajyer.Entities.Product]]] GetProducts() on controller Vakifbankstajyer.Controllers.ProductsController (Vakifbankstajyer).
+2026-05-22 17:18:42.545 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p].[InterestRate], [p].[MaxAmount], [p].[MaxTerm], [p].[MinAmount], [p].[MinTerm], [p].[Name]
+FROM [Products] AS [p]
+2026-05-22 17:18:42.546 +03:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[Vakifbankstajyer.Entities.Product, Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-22 17:18:42.546 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.ProductsController.GetProducts (Vakifbankstajyer) in 2.0571ms
+2026-05-22 17:18:42.546 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.ProductsController.GetProducts (Vakifbankstajyer)'
+2026-05-22 17:18:42.546 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5143/api/products - 200 null application/json; charset=utf-8 3.0925ms
+2026-05-22 17:18:43.279 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5143/api/products - null null
+2026-05-22 17:18:43.279 +03:00 [INF] CORS policy execution successful.
+2026-05-22 17:18:43.279 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.ProductsController.GetProducts (Vakifbankstajyer)'
+2026-05-22 17:18:43.279 +03:00 [INF] Route matched with {action = "GetProducts", controller = "Products"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[Vakifbankstajyer.Entities.Product]]] GetProducts() on controller Vakifbankstajyer.Controllers.ProductsController (Vakifbankstajyer).
+2026-05-22 17:18:43.280 +03:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p].[InterestRate], [p].[MaxAmount], [p].[MaxTerm], [p].[MinAmount], [p].[MinTerm], [p].[Name]
+FROM [Products] AS [p]
+2026-05-22 17:18:43.281 +03:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[Vakifbankstajyer.Entities.Product, Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-22 17:18:43.281 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.ProductsController.GetProducts (Vakifbankstajyer) in 1.5568ms
+2026-05-22 17:18:43.281 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.ProductsController.GetProducts (Vakifbankstajyer)'
+2026-05-22 17:18:43.281 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5143/api/products - 200 null application/json; charset=utf-8 2.1443ms
+2026-05-22 17:18:53.256 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5143/api/calculations/history - null null
+2026-05-22 17:18:53.256 +03:00 [INF] CORS policy execution successful.
+2026-05-22 17:18:53.256 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.CalculationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 17:18:53.256 +03:00 [INF] Route matched with {action = "GetHistory", controller = "Calculations"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[Vakifbankstajyer.Entities.CalculationHistory]]] GetHistory() on controller Vakifbankstajyer.Controllers.CalculationsController (Vakifbankstajyer).
+2026-05-22 17:18:53.258 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5143/api/applications/history - null null
+2026-05-22 17:18:53.258 +03:00 [INF] CORS policy execution successful.
+2026-05-22 17:18:53.258 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 17:18:53.258 +03:00 [INF] Route matched with {action = "GetHistory", controller = "Applications"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetHistory() on controller Vakifbankstajyer.Controllers.ApplicationsController (Vakifbankstajyer).
+2026-05-22 17:18:53.262 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Amount], [c].[BankName], [c].[Email], [c].[LoanTerm], [c].[LoanType], [c].[NameSurname], [c].[RiskScore], [c].[RiskStatus], [c].[Status]
+FROM [CreditApplications] AS [c]
+ORDER BY [c].[Id] DESC
+2026-05-22 17:18:53.263 +03:00 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Age], [c].[Amount], [c].[CalculatedMonthlyPayment], [c].[CalculationDate], [c].[Housing], [c].[Job], [c].[ProductId], [c].[Purpose], [c].[RiskScore], [c].[RiskStatus], [c].[Sex], [c].[Term], [c].[TotalPayment], [p].[Id], [p].[InterestRate], [p].[MaxAmount], [p].[MaxTerm], [p].[MinAmount], [p].[MinTerm], [p].[Name]
+FROM [CalculationHistories] AS [c]
+INNER JOIN [Products] AS [p] ON [c].[ProductId] = [p].[Id]
+ORDER BY [c].[CalculationDate] DESC
+2026-05-22 17:18:53.263 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Vakifbankstajyer.Entities.CreditApplication, Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-22 17:18:53.263 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer) in 4.7339ms
+2026-05-22 17:18:53.263 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 17:18:53.263 +03:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[Vakifbankstajyer.Entities.CalculationHistory, Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-22 17:18:53.263 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5143/api/applications/history - 200 null application/json; charset=utf-8 5.7547ms
+2026-05-22 17:18:53.263 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.CalculationsController.GetHistory (Vakifbankstajyer) in 6.7991ms
+2026-05-22 17:18:53.264 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.CalculationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 17:18:53.264 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5143/api/calculations/history - 200 null application/json; charset=utf-8 8.0103ms
+2026-05-22 17:18:55.522 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5143/api/calculations/history - null null
+2026-05-22 17:18:55.522 +03:00 [INF] CORS policy execution successful.
+2026-05-22 17:18:55.522 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.CalculationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 17:18:55.522 +03:00 [INF] Route matched with {action = "GetHistory", controller = "Calculations"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[Vakifbankstajyer.Entities.CalculationHistory]]] GetHistory() on controller Vakifbankstajyer.Controllers.CalculationsController (Vakifbankstajyer).
+2026-05-22 17:18:55.522 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5143/api/applications/history - null null
+2026-05-22 17:18:55.523 +03:00 [INF] CORS policy execution successful.
+2026-05-22 17:18:55.523 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 17:18:55.523 +03:00 [INF] Route matched with {action = "GetHistory", controller = "Applications"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetHistory() on controller Vakifbankstajyer.Controllers.ApplicationsController (Vakifbankstajyer).
+2026-05-22 17:18:55.524 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Amount], [c].[BankName], [c].[Email], [c].[LoanTerm], [c].[LoanType], [c].[NameSurname], [c].[RiskScore], [c].[RiskStatus], [c].[Status]
+FROM [CreditApplications] AS [c]
+ORDER BY [c].[Id] DESC
+2026-05-22 17:18:55.524 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Age], [c].[Amount], [c].[CalculatedMonthlyPayment], [c].[CalculationDate], [c].[Housing], [c].[Job], [c].[ProductId], [c].[Purpose], [c].[RiskScore], [c].[RiskStatus], [c].[Sex], [c].[Term], [c].[TotalPayment], [p].[Id], [p].[InterestRate], [p].[MaxAmount], [p].[MaxTerm], [p].[MinAmount], [p].[MinTerm], [p].[Name]
+FROM [CalculationHistories] AS [c]
+INNER JOIN [Products] AS [p] ON [c].[ProductId] = [p].[Id]
+ORDER BY [c].[CalculationDate] DESC
+2026-05-22 17:18:55.525 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Vakifbankstajyer.Entities.CreditApplication, Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-22 17:18:55.525 +03:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[Vakifbankstajyer.Entities.CalculationHistory, Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-22 17:18:55.525 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer) in 2.6375ms
+2026-05-22 17:18:55.525 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.CalculationsController.GetHistory (Vakifbankstajyer) in 3.2272ms
+2026-05-22 17:18:55.526 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 17:18:55.526 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.CalculationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 17:18:55.526 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5143/api/calculations/history - 200 null application/json; charset=utf-8 4.1295ms
+2026-05-22 17:18:55.526 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5143/api/applications/history - 200 null application/json; charset=utf-8 3.2741ms
+2026-05-22 17:20:23.890 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5143/api/products - null null
+2026-05-22 17:20:23.890 +03:00 [INF] CORS policy execution successful.
+2026-05-22 17:20:23.890 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.ProductsController.GetProducts (Vakifbankstajyer)'
+2026-05-22 17:20:23.891 +03:00 [INF] Route matched with {action = "GetProducts", controller = "Products"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[Vakifbankstajyer.Entities.Product]]] GetProducts() on controller Vakifbankstajyer.Controllers.ProductsController (Vakifbankstajyer).
+2026-05-22 17:20:23.895 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p].[InterestRate], [p].[MaxAmount], [p].[MaxTerm], [p].[MinAmount], [p].[MinTerm], [p].[Name]
+FROM [Products] AS [p]
+2026-05-22 17:20:23.896 +03:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[Vakifbankstajyer.Entities.Product, Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-22 17:20:23.896 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.ProductsController.GetProducts (Vakifbankstajyer) in 5.1848ms
+2026-05-22 17:20:23.896 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.ProductsController.GetProducts (Vakifbankstajyer)'
+2026-05-22 17:20:23.896 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5143/api/products - 200 null application/json; charset=utf-8 6.0671ms
+2026-05-22 17:20:24.440 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5143/api/products - null null
+2026-05-22 17:20:24.440 +03:00 [INF] CORS policy execution successful.
+2026-05-22 17:20:24.440 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.ProductsController.GetProducts (Vakifbankstajyer)'
+2026-05-22 17:20:24.440 +03:00 [INF] Route matched with {action = "GetProducts", controller = "Products"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[Vakifbankstajyer.Entities.Product]]] GetProducts() on controller Vakifbankstajyer.Controllers.ProductsController (Vakifbankstajyer).
+2026-05-22 17:20:24.441 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p].[InterestRate], [p].[MaxAmount], [p].[MaxTerm], [p].[MinAmount], [p].[MinTerm], [p].[Name]
+FROM [Products] AS [p]
+2026-05-22 17:20:24.442 +03:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[Vakifbankstajyer.Entities.Product, Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-22 17:20:24.442 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.ProductsController.GetProducts (Vakifbankstajyer) in 1.9233ms
+2026-05-22 17:20:24.442 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.ProductsController.GetProducts (Vakifbankstajyer)'
+2026-05-22 17:20:24.442 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5143/api/products - 200 null application/json; charset=utf-8 2.5064ms
+2026-05-22 17:22:17.756 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5143/api/products - null null
+2026-05-22 17:22:17.756 +03:00 [INF] CORS policy execution successful.
+2026-05-22 17:22:17.756 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.ProductsController.GetProducts (Vakifbankstajyer)'
+2026-05-22 17:22:17.756 +03:00 [INF] Route matched with {action = "GetProducts", controller = "Products"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[Vakifbankstajyer.Entities.Product]]] GetProducts() on controller Vakifbankstajyer.Controllers.ProductsController (Vakifbankstajyer).
+2026-05-22 17:22:17.759 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p].[InterestRate], [p].[MaxAmount], [p].[MaxTerm], [p].[MinAmount], [p].[MinTerm], [p].[Name]
+FROM [Products] AS [p]
+2026-05-22 17:22:17.760 +03:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[Vakifbankstajyer.Entities.Product, Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-22 17:22:17.760 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.ProductsController.GetProducts (Vakifbankstajyer) in 3.3067ms
+2026-05-22 17:22:17.760 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.ProductsController.GetProducts (Vakifbankstajyer)'
+2026-05-22 17:22:17.760 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5143/api/products - 200 null application/json; charset=utf-8 3.8881ms
+2026-05-22 17:22:18.339 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5143/api/products - null null
+2026-05-22 17:22:18.339 +03:00 [INF] CORS policy execution successful.
+2026-05-22 17:22:18.339 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.ProductsController.GetProducts (Vakifbankstajyer)'
+2026-05-22 17:22:18.339 +03:00 [INF] Route matched with {action = "GetProducts", controller = "Products"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[Vakifbankstajyer.Entities.Product]]] GetProducts() on controller Vakifbankstajyer.Controllers.ProductsController (Vakifbankstajyer).
+2026-05-22 17:22:18.341 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p].[InterestRate], [p].[MaxAmount], [p].[MaxTerm], [p].[MinAmount], [p].[MinTerm], [p].[Name]
+FROM [Products] AS [p]
+2026-05-22 17:22:18.341 +03:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[Vakifbankstajyer.Entities.Product, Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-22 17:22:18.342 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.ProductsController.GetProducts (Vakifbankstajyer) in 2.4082ms
+2026-05-22 17:22:18.342 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.ProductsController.GetProducts (Vakifbankstajyer)'
+2026-05-22 17:22:18.342 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5143/api/products - 200 null application/json; charset=utf-8 3.2477ms
+2026-05-22 17:22:21.774 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5143/api/calculations/history - null null
+2026-05-22 17:22:21.775 +03:00 [INF] CORS policy execution successful.
+2026-05-22 17:22:21.775 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.CalculationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 17:22:21.775 +03:00 [INF] Route matched with {action = "GetHistory", controller = "Calculations"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[Vakifbankstajyer.Entities.CalculationHistory]]] GetHistory() on controller Vakifbankstajyer.Controllers.CalculationsController (Vakifbankstajyer).
+2026-05-22 17:22:21.775 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5143/api/applications/history - null null
+2026-05-22 17:22:21.776 +03:00 [INF] CORS policy execution successful.
+2026-05-22 17:22:21.776 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 17:22:21.776 +03:00 [INF] Route matched with {action = "GetHistory", controller = "Applications"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetHistory() on controller Vakifbankstajyer.Controllers.ApplicationsController (Vakifbankstajyer).
+2026-05-22 17:22:21.780 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Amount], [c].[BankName], [c].[Email], [c].[LoanTerm], [c].[LoanType], [c].[NameSurname], [c].[RiskScore], [c].[RiskStatus], [c].[Status]
+FROM [CreditApplications] AS [c]
+ORDER BY [c].[Id] DESC
+2026-05-22 17:22:21.780 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Vakifbankstajyer.Entities.CreditApplication, Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-22 17:22:21.780 +03:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Age], [c].[Amount], [c].[CalculatedMonthlyPayment], [c].[CalculationDate], [c].[Housing], [c].[Job], [c].[ProductId], [c].[Purpose], [c].[RiskScore], [c].[RiskStatus], [c].[Sex], [c].[Term], [c].[TotalPayment], [p].[Id], [p].[InterestRate], [p].[MaxAmount], [p].[MaxTerm], [p].[MinAmount], [p].[MinTerm], [p].[Name]
+FROM [CalculationHistories] AS [c]
+INNER JOIN [Products] AS [p] ON [c].[ProductId] = [p].[Id]
+ORDER BY [c].[CalculationDate] DESC
+2026-05-22 17:22:21.780 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer) in 4.0213ms
+2026-05-22 17:22:21.780 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 17:22:21.780 +03:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[Vakifbankstajyer.Entities.CalculationHistory, Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-22 17:22:21.780 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5143/api/applications/history - 200 null application/json; charset=utf-8 4.6997ms
+2026-05-22 17:22:21.780 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.CalculationsController.GetHistory (Vakifbankstajyer) in 5.3877ms
+2026-05-22 17:22:21.780 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.CalculationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 17:22:21.780 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5143/api/calculations/history - 200 null application/json; charset=utf-8 6.0388ms
+2026-05-22 17:28:01.183 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5143/api/products - null null
+2026-05-22 17:28:01.183 +03:00 [INF] CORS policy execution successful.
+2026-05-22 17:28:01.183 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.ProductsController.GetProducts (Vakifbankstajyer)'
+2026-05-22 17:28:01.183 +03:00 [INF] Route matched with {action = "GetProducts", controller = "Products"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[Vakifbankstajyer.Entities.Product]]] GetProducts() on controller Vakifbankstajyer.Controllers.ProductsController (Vakifbankstajyer).
+2026-05-22 17:28:01.188 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p].[InterestRate], [p].[MaxAmount], [p].[MaxTerm], [p].[MinAmount], [p].[MinTerm], [p].[Name]
+FROM [Products] AS [p]
+2026-05-22 17:28:01.188 +03:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[Vakifbankstajyer.Entities.Product, Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-22 17:28:01.189 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.ProductsController.GetProducts (Vakifbankstajyer) in 5.0695ms
+2026-05-22 17:28:01.189 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.ProductsController.GetProducts (Vakifbankstajyer)'
+2026-05-22 17:28:01.189 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5143/api/products - 200 null application/json; charset=utf-8 6.0947ms
+2026-05-22 17:28:02.301 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5143/api/products - null null
+2026-05-22 17:28:02.302 +03:00 [INF] CORS policy execution successful.
+2026-05-22 17:28:02.302 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.ProductsController.GetProducts (Vakifbankstajyer)'
+2026-05-22 17:28:02.302 +03:00 [INF] Route matched with {action = "GetProducts", controller = "Products"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[Vakifbankstajyer.Entities.Product]]] GetProducts() on controller Vakifbankstajyer.Controllers.ProductsController (Vakifbankstajyer).
+2026-05-22 17:28:02.303 +03:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p].[InterestRate], [p].[MaxAmount], [p].[MaxTerm], [p].[MinAmount], [p].[MinTerm], [p].[Name]
+FROM [Products] AS [p]
+2026-05-22 17:28:02.303 +03:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[Vakifbankstajyer.Entities.Product, Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-22 17:28:02.304 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.ProductsController.GetProducts (Vakifbankstajyer) in 1.5457ms
+2026-05-22 17:28:02.304 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.ProductsController.GetProducts (Vakifbankstajyer)'
+2026-05-22 17:28:02.304 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5143/api/products - 200 null application/json; charset=utf-8 2.2111ms
+2026-05-22 17:28:29.447 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5143/api/products - null null
+2026-05-22 17:28:29.448 +03:00 [INF] CORS policy execution successful.
+2026-05-22 17:28:29.448 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.ProductsController.GetProducts (Vakifbankstajyer)'
+2026-05-22 17:28:29.448 +03:00 [INF] Route matched with {action = "GetProducts", controller = "Products"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[Vakifbankstajyer.Entities.Product]]] GetProducts() on controller Vakifbankstajyer.Controllers.ProductsController (Vakifbankstajyer).
+2026-05-22 17:28:29.451 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p].[InterestRate], [p].[MaxAmount], [p].[MaxTerm], [p].[MinAmount], [p].[MinTerm], [p].[Name]
+FROM [Products] AS [p]
+2026-05-22 17:28:29.451 +03:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[Vakifbankstajyer.Entities.Product, Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-22 17:28:29.452 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.ProductsController.GetProducts (Vakifbankstajyer) in 3.8066ms
+2026-05-22 17:28:29.452 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.ProductsController.GetProducts (Vakifbankstajyer)'
+2026-05-22 17:28:29.452 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5143/api/products - 200 null application/json; charset=utf-8 4.3888ms
+2026-05-22 17:33:37.621 +03:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5143/api/auth/login - null null
+2026-05-22 17:33:37.621 +03:00 [INF] CORS policy execution successful.
+2026-05-22 17:33:37.621 +03:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5143/api/auth/login - 204 null null 0.2797ms
+2026-05-22 17:33:37.622 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5143/api/auth/login - application/json 59
+2026-05-22 17:33:37.622 +03:00 [INF] CORS policy execution successful.
+2026-05-22 17:33:37.622 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.AuthController.Login (Vakifbankstajyer)'
+2026-05-22 17:33:37.623 +03:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(Vakifbankstajyer.Controllers.LoginDto) on controller Vakifbankstajyer.Controllers.AuthController (Vakifbankstajyer).
+2026-05-22 17:33:37.633 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[@__request_Username_0='?' (Size = 50), @__request_Password_1='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[CreatedAt], [u].[Password], [u].[Role], [u].[Username]
+FROM [Users] AS [u]
+WHERE [u].[Username] = @__request_Username_0 AND [u].[Password] = @__request_Password_1
+2026-05-22 17:33:37.633 +03:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType4`3[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-05-22 17:33:37.633 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.AuthController.Login (Vakifbankstajyer) in 10.8287ms
+2026-05-22 17:33:37.633 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.AuthController.Login (Vakifbankstajyer)'
+2026-05-22 17:33:37.634 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5143/api/auth/login - 200 null application/json; charset=utf-8 11.3243ms
+2026-05-22 17:33:38.646 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5143/api/applications/history - null null
+2026-05-22 17:33:38.646 +03:00 [INF] CORS policy execution successful.
+2026-05-22 17:33:38.646 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 17:33:38.647 +03:00 [INF] Route matched with {action = "GetHistory", controller = "Applications"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetHistory() on controller Vakifbankstajyer.Controllers.ApplicationsController (Vakifbankstajyer).
+2026-05-22 17:33:38.647 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5143/api/analytics/dashboard - null null
+2026-05-22 17:33:38.647 +03:00 [INF] CORS policy execution successful.
+2026-05-22 17:33:38.647 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.AnalyticsController.GetDashboardStats (Vakifbankstajyer)'
+2026-05-22 17:33:38.648 +03:00 [INF] Route matched with {action = "GetDashboardStats", controller = "Analytics"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetDashboardStats() on controller Vakifbankstajyer.Controllers.AnalyticsController (Vakifbankstajyer).
+2026-05-22 17:33:38.650 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Amount], [c].[BankName], [c].[Email], [c].[LoanTerm], [c].[LoanType], [c].[NameSurname], [c].[RiskScore], [c].[RiskStatus], [c].[Status]
+FROM [CreditApplications] AS [c]
+ORDER BY [c].[Id] DESC
+2026-05-22 17:33:38.650 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Vakifbankstajyer.Entities.CreditApplication, Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-22 17:33:38.650 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer) in 3.4087ms
+2026-05-22 17:33:38.650 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 17:33:38.650 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5143/api/applications/history - 200 null application/json; charset=utf-8 3.8541ms
+2026-05-22 17:33:38.654 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Amount], [c].[BankName], [c].[Email], [c].[LoanTerm], [c].[LoanType], [c].[NameSurname], [c].[RiskScore], [c].[RiskStatus], [c].[Status]
+FROM [CreditApplications] AS [c]
+2026-05-22 17:33:38.656 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Age], [c].[Amount], [c].[CalculatedMonthlyPayment], [c].[CalculationDate], [c].[Housing], [c].[Job], [c].[ProductId], [c].[Purpose], [c].[RiskScore], [c].[RiskStatus], [c].[Sex], [c].[Term], [c].[TotalPayment]
+FROM [CalculationHistories] AS [c]
+2026-05-22 17:33:38.656 +03:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`9[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.List`1[[<>f__AnonymousType0`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[<>f__AnonymousType0`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]][], Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Double, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-05-22 17:33:38.657 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.AnalyticsController.GetDashboardStats (Vakifbankstajyer) in 9.0804ms
+2026-05-22 17:33:38.657 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.AnalyticsController.GetDashboardStats (Vakifbankstajyer)'
+2026-05-22 17:33:38.657 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5143/api/analytics/dashboard - 200 null application/json; charset=utf-8 9.4954ms
+2026-05-22 17:33:52.761 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5143/api/calculations/history - null null
+2026-05-22 17:33:52.761 +03:00 [INF] CORS policy execution successful.
+2026-05-22 17:33:52.761 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.CalculationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 17:33:52.761 +03:00 [INF] Route matched with {action = "GetHistory", controller = "Calculations"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[Vakifbankstajyer.Entities.CalculationHistory]]] GetHistory() on controller Vakifbankstajyer.Controllers.CalculationsController (Vakifbankstajyer).
+2026-05-22 17:33:52.762 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5143/api/applications/history - null null
+2026-05-22 17:33:52.762 +03:00 [INF] CORS policy execution successful.
+2026-05-22 17:33:52.762 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 17:33:52.762 +03:00 [INF] Route matched with {action = "GetHistory", controller = "Applications"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetHistory() on controller Vakifbankstajyer.Controllers.ApplicationsController (Vakifbankstajyer).
+2026-05-22 17:33:52.766 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Age], [c].[Amount], [c].[CalculatedMonthlyPayment], [c].[CalculationDate], [c].[Housing], [c].[Job], [c].[ProductId], [c].[Purpose], [c].[RiskScore], [c].[RiskStatus], [c].[Sex], [c].[Term], [c].[TotalPayment], [p].[Id], [p].[InterestRate], [p].[MaxAmount], [p].[MaxTerm], [p].[MinAmount], [p].[MinTerm], [p].[Name]
+FROM [CalculationHistories] AS [c]
+INNER JOIN [Products] AS [p] ON [c].[ProductId] = [p].[Id]
+ORDER BY [c].[CalculationDate] DESC
+2026-05-22 17:33:52.766 +03:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[Vakifbankstajyer.Entities.CalculationHistory, Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-22 17:33:52.766 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.CalculationsController.GetHistory (Vakifbankstajyer) in 4.7565ms
+2026-05-22 17:33:52.766 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.CalculationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 17:33:52.766 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5143/api/calculations/history - 200 null application/json; charset=utf-8 5.2732ms
+2026-05-22 17:33:52.767 +03:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Amount], [c].[BankName], [c].[Email], [c].[LoanTerm], [c].[LoanType], [c].[NameSurname], [c].[RiskScore], [c].[RiskStatus], [c].[Status]
+FROM [CreditApplications] AS [c]
+ORDER BY [c].[Id] DESC
+2026-05-22 17:33:52.767 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Vakifbankstajyer.Entities.CreditApplication, Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-22 17:33:52.767 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer) in 5.2934ms
+2026-05-22 17:33:52.767 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 17:33:52.767 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5143/api/applications/history - 200 null application/json; charset=utf-8 5.741ms
+2026-05-22 17:34:01.384 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5143/api/products - null null
+2026-05-22 17:34:01.384 +03:00 [INF] CORS policy execution successful.
+2026-05-22 17:34:01.384 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.ProductsController.GetProducts (Vakifbankstajyer)'
+2026-05-22 17:34:01.384 +03:00 [INF] Route matched with {action = "GetProducts", controller = "Products"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[Vakifbankstajyer.Entities.Product]]] GetProducts() on controller Vakifbankstajyer.Controllers.ProductsController (Vakifbankstajyer).
+2026-05-22 17:34:01.387 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p].[InterestRate], [p].[MaxAmount], [p].[MaxTerm], [p].[MinAmount], [p].[MinTerm], [p].[Name]
+FROM [Products] AS [p]
+2026-05-22 17:34:01.388 +03:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[Vakifbankstajyer.Entities.Product, Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-22 17:34:01.388 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.ProductsController.GetProducts (Vakifbankstajyer) in 3.3504ms
+2026-05-22 17:34:01.388 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.ProductsController.GetProducts (Vakifbankstajyer)'
+2026-05-22 17:34:01.388 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5143/api/products - 200 null application/json; charset=utf-8 3.8544ms
+2026-05-22 17:34:06.801 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5143/api/products - null null
+2026-05-22 17:34:06.802 +03:00 [INF] CORS policy execution successful.
+2026-05-22 17:34:06.802 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.ProductsController.GetProducts (Vakifbankstajyer)'
+2026-05-22 17:34:06.802 +03:00 [INF] Route matched with {action = "GetProducts", controller = "Products"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[Vakifbankstajyer.Entities.Product]]] GetProducts() on controller Vakifbankstajyer.Controllers.ProductsController (Vakifbankstajyer).
+2026-05-22 17:34:06.803 +03:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p].[InterestRate], [p].[MaxAmount], [p].[MaxTerm], [p].[MinAmount], [p].[MinTerm], [p].[Name]
+FROM [Products] AS [p]
+2026-05-22 17:34:06.803 +03:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[Vakifbankstajyer.Entities.Product, Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-22 17:34:06.803 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.ProductsController.GetProducts (Vakifbankstajyer) in 1.6261ms
+2026-05-22 17:34:06.803 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.ProductsController.GetProducts (Vakifbankstajyer)'
+2026-05-22 17:34:06.803 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5143/api/products - 200 null application/json; charset=utf-8 2.1461ms
+2026-05-22 17:36:58.974 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5143/api/products - null null
+2026-05-22 17:36:58.975 +03:00 [INF] CORS policy execution successful.
+2026-05-22 17:36:58.975 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.ProductsController.GetProducts (Vakifbankstajyer)'
+2026-05-22 17:36:58.975 +03:00 [INF] Route matched with {action = "GetProducts", controller = "Products"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[Vakifbankstajyer.Entities.Product]]] GetProducts() on controller Vakifbankstajyer.Controllers.ProductsController (Vakifbankstajyer).
+2026-05-22 17:36:58.979 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p].[InterestRate], [p].[MaxAmount], [p].[MaxTerm], [p].[MinAmount], [p].[MinTerm], [p].[Name]
+FROM [Products] AS [p]
+2026-05-22 17:36:58.979 +03:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[Vakifbankstajyer.Entities.Product, Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-22 17:36:58.980 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.ProductsController.GetProducts (Vakifbankstajyer) in 4.5644ms
+2026-05-22 17:36:58.980 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.ProductsController.GetProducts (Vakifbankstajyer)'
+2026-05-22 17:36:58.980 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5143/api/products - 200 null application/json; charset=utf-8 5.4218ms
+2026-05-22 17:39:51.784 +03:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5143/api/applications - null null
+2026-05-22 17:39:51.784 +03:00 [INF] CORS policy execution successful.
+2026-05-22 17:39:51.784 +03:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5143/api/applications - 204 null null 0.4424ms
+2026-05-22 17:39:51.786 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5143/api/applications - application/json 247
+2026-05-22 17:39:51.786 +03:00 [INF] CORS policy execution successful.
+2026-05-22 17:39:51.786 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.ApplicationsController.CreateApplication (Vakifbankstajyer)'
+2026-05-22 17:39:51.791 +03:00 [INF] Route matched with {action = "CreateApplication", controller = "Applications"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult CreateApplication(Vakifbankstajyer.DTOs.ApplicationRequestDto) on controller Vakifbankstajyer.Controllers.ApplicationsController (Vakifbankstajyer).
+2026-05-22 17:39:52.175 +03:00 [INF] Executed DbCommand (7ms) [Parameters=[@p0='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p1='?' (Size = 4000), @p2='?' (Size = 4000), @p3='?' (DbType = Int32), @p4='?' (Size = 4000), @p5='?' (Size = 4000), @p6='?' (DbType = Single), @p7='?' (Size = 4000), @p8='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [CreditApplications] ([Amount], [BankName], [Email], [LoanTerm], [LoanType], [NameSurname], [RiskScore], [RiskStatus], [Status])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8);
+2026-05-22 17:39:52.183 +03:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType2`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-05-22 17:39:52.183 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.ApplicationsController.CreateApplication (Vakifbankstajyer) in 392.1441ms
+2026-05-22 17:39:52.183 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.ApplicationsController.CreateApplication (Vakifbankstajyer)'
+2026-05-22 17:39:52.184 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5143/api/applications - 200 null application/json; charset=utf-8 398.1041ms
+2026-05-22 17:39:57.253 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5143/api/calculations/history - null null
+2026-05-22 17:39:57.253 +03:00 [INF] CORS policy execution successful.
+2026-05-22 17:39:57.253 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.CalculationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 17:39:57.254 +03:00 [INF] Route matched with {action = "GetHistory", controller = "Calculations"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[Vakifbankstajyer.Entities.CalculationHistory]]] GetHistory() on controller Vakifbankstajyer.Controllers.CalculationsController (Vakifbankstajyer).
+2026-05-22 17:39:57.254 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5143/api/applications/history - null null
+2026-05-22 17:39:57.255 +03:00 [INF] CORS policy execution successful.
+2026-05-22 17:39:57.255 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 17:39:57.255 +03:00 [INF] Route matched with {action = "GetHistory", controller = "Applications"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetHistory() on controller Vakifbankstajyer.Controllers.ApplicationsController (Vakifbankstajyer).
+2026-05-22 17:39:57.260 +03:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Age], [c].[Amount], [c].[CalculatedMonthlyPayment], [c].[CalculationDate], [c].[Housing], [c].[Job], [c].[ProductId], [c].[Purpose], [c].[RiskScore], [c].[RiskStatus], [c].[Sex], [c].[Term], [c].[TotalPayment], [p].[Id], [p].[InterestRate], [p].[MaxAmount], [p].[MaxTerm], [p].[MinAmount], [p].[MinTerm], [p].[Name]
+FROM [CalculationHistories] AS [c]
+INNER JOIN [Products] AS [p] ON [c].[ProductId] = [p].[Id]
+ORDER BY [c].[CalculationDate] DESC
+2026-05-22 17:39:57.260 +03:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[Vakifbankstajyer.Entities.CalculationHistory, Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-22 17:39:57.260 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.CalculationsController.GetHistory (Vakifbankstajyer) in 6.6216ms
+2026-05-22 17:39:57.260 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.CalculationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 17:39:57.261 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5143/api/calculations/history - 200 null application/json; charset=utf-8 7.4375ms
+2026-05-22 17:39:57.265 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Amount], [c].[BankName], [c].[Email], [c].[LoanTerm], [c].[LoanType], [c].[NameSurname], [c].[RiskScore], [c].[RiskStatus], [c].[Status]
+FROM [CreditApplications] AS [c]
+ORDER BY [c].[Id] DESC
+2026-05-22 17:39:57.266 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Vakifbankstajyer.Entities.CreditApplication, Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-22 17:39:57.272 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer) in 16.9354ms
+2026-05-22 17:39:57.272 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 17:39:57.272 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5143/api/applications/history - 200 null application/json; charset=utf-8 17.657ms
+2026-05-22 17:39:58.932 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5143/api/applications/history - null null
+2026-05-22 17:39:58.932 +03:00 [INF] CORS policy execution successful.
+2026-05-22 17:39:58.932 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 17:39:58.932 +03:00 [INF] Route matched with {action = "GetHistory", controller = "Applications"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetHistory() on controller Vakifbankstajyer.Controllers.ApplicationsController (Vakifbankstajyer).
+2026-05-22 17:39:58.933 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5143/api/analytics/dashboard - null null
+2026-05-22 17:39:58.933 +03:00 [INF] CORS policy execution successful.
+2026-05-22 17:39:58.933 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.AnalyticsController.GetDashboardStats (Vakifbankstajyer)'
+2026-05-22 17:39:58.933 +03:00 [INF] Route matched with {action = "GetDashboardStats", controller = "Analytics"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetDashboardStats() on controller Vakifbankstajyer.Controllers.AnalyticsController (Vakifbankstajyer).
+2026-05-22 17:39:58.934 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Amount], [c].[BankName], [c].[Email], [c].[LoanTerm], [c].[LoanType], [c].[NameSurname], [c].[RiskScore], [c].[RiskStatus], [c].[Status]
+FROM [CreditApplications] AS [c]
+ORDER BY [c].[Id] DESC
+2026-05-22 17:39:58.935 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Vakifbankstajyer.Entities.CreditApplication, Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-22 17:39:58.935 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer) in 2.3482ms
+2026-05-22 17:39:58.935 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 17:39:58.935 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5143/api/applications/history - 200 null application/json; charset=utf-8 3.2082ms
+2026-05-22 17:39:58.936 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Amount], [c].[BankName], [c].[Email], [c].[LoanTerm], [c].[LoanType], [c].[NameSurname], [c].[RiskScore], [c].[RiskStatus], [c].[Status]
+FROM [CreditApplications] AS [c]
+2026-05-22 17:39:58.939 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Age], [c].[Amount], [c].[CalculatedMonthlyPayment], [c].[CalculationDate], [c].[Housing], [c].[Job], [c].[ProductId], [c].[Purpose], [c].[RiskScore], [c].[RiskStatus], [c].[Sex], [c].[Term], [c].[TotalPayment]
+FROM [CalculationHistories] AS [c]
+2026-05-22 17:39:58.949 +03:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`9[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.List`1[[<>f__AnonymousType0`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[<>f__AnonymousType0`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]][], Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Double, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-05-22 17:39:58.949 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.AnalyticsController.GetDashboardStats (Vakifbankstajyer) in 15.9ms
+2026-05-22 17:39:58.949 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.AnalyticsController.GetDashboardStats (Vakifbankstajyer)'
+2026-05-22 17:39:58.950 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5143/api/analytics/dashboard - 200 null application/json; charset=utf-8 16.5434ms
+2026-05-22 17:41:16.729 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5143/api/applications/history - null null
+2026-05-22 17:41:16.729 +03:00 [INF] CORS policy execution successful.
+2026-05-22 17:41:16.729 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 17:41:16.729 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5143/api/analytics/dashboard - null null
+2026-05-22 17:41:16.729 +03:00 [INF] Route matched with {action = "GetHistory", controller = "Applications"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetHistory() on controller Vakifbankstajyer.Controllers.ApplicationsController (Vakifbankstajyer).
+2026-05-22 17:41:16.729 +03:00 [INF] CORS policy execution successful.
+2026-05-22 17:41:16.729 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.AnalyticsController.GetDashboardStats (Vakifbankstajyer)'
+2026-05-22 17:41:16.729 +03:00 [INF] Route matched with {action = "GetDashboardStats", controller = "Analytics"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetDashboardStats() on controller Vakifbankstajyer.Controllers.AnalyticsController (Vakifbankstajyer).
+2026-05-22 17:41:16.731 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Amount], [c].[BankName], [c].[Email], [c].[LoanTerm], [c].[LoanType], [c].[NameSurname], [c].[RiskScore], [c].[RiskStatus], [c].[Status]
+FROM [CreditApplications] AS [c]
+ORDER BY [c].[Id] DESC
+2026-05-22 17:41:16.731 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Vakifbankstajyer.Entities.CreditApplication, Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-22 17:41:16.732 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer) in 2.6402ms
+2026-05-22 17:41:16.732 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 17:41:16.732 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5143/api/applications/history - 200 null application/json; charset=utf-8 3.0628ms
+2026-05-22 17:41:16.732 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Amount], [c].[BankName], [c].[Email], [c].[LoanTerm], [c].[LoanType], [c].[NameSurname], [c].[RiskScore], [c].[RiskStatus], [c].[Status]
+FROM [CreditApplications] AS [c]
+2026-05-22 17:41:16.734 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Age], [c].[Amount], [c].[CalculatedMonthlyPayment], [c].[CalculationDate], [c].[Housing], [c].[Job], [c].[ProductId], [c].[Purpose], [c].[RiskScore], [c].[RiskStatus], [c].[Sex], [c].[Term], [c].[TotalPayment]
+FROM [CalculationHistories] AS [c]
+2026-05-22 17:41:16.735 +03:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`9[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.List`1[[<>f__AnonymousType0`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[<>f__AnonymousType0`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]][], Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Double, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-05-22 17:41:16.735 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.AnalyticsController.GetDashboardStats (Vakifbankstajyer) in 5.6502ms
+2026-05-22 17:41:16.735 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.AnalyticsController.GetDashboardStats (Vakifbankstajyer)'
+2026-05-22 17:41:16.735 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5143/api/analytics/dashboard - 200 null application/json; charset=utf-8 5.9558ms
+2026-05-22 17:51:31.085 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5143/api/applications/history - null null
+2026-05-22 17:51:31.085 +03:00 [INF] CORS policy execution successful.
+2026-05-22 17:51:31.085 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 17:51:31.085 +03:00 [INF] Route matched with {action = "GetHistory", controller = "Applications"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetHistory() on controller Vakifbankstajyer.Controllers.ApplicationsController (Vakifbankstajyer).
+2026-05-22 17:51:31.085 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5143/api/analytics/dashboard - null null
+2026-05-22 17:51:31.085 +03:00 [INF] CORS policy execution successful.
+2026-05-22 17:51:31.085 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.AnalyticsController.GetDashboardStats (Vakifbankstajyer)'
+2026-05-22 17:51:31.085 +03:00 [INF] Route matched with {action = "GetDashboardStats", controller = "Analytics"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetDashboardStats() on controller Vakifbankstajyer.Controllers.AnalyticsController (Vakifbankstajyer).
+2026-05-22 17:51:31.093 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Amount], [c].[BankName], [c].[Email], [c].[LoanTerm], [c].[LoanType], [c].[NameSurname], [c].[RiskScore], [c].[RiskStatus], [c].[Status]
+FROM [CreditApplications] AS [c]
+2026-05-22 17:51:31.094 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Age], [c].[Amount], [c].[CalculatedMonthlyPayment], [c].[CalculationDate], [c].[Housing], [c].[Job], [c].[ProductId], [c].[Purpose], [c].[RiskScore], [c].[RiskStatus], [c].[Sex], [c].[Term], [c].[TotalPayment]
+FROM [CalculationHistories] AS [c]
+2026-05-22 17:51:31.095 +03:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`9[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.List`1[[<>f__AnonymousType0`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[<>f__AnonymousType0`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]][], Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Double, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-05-22 17:51:31.095 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.AnalyticsController.GetDashboardStats (Vakifbankstajyer) in 9.4432ms
+2026-05-22 17:51:31.095 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.AnalyticsController.GetDashboardStats (Vakifbankstajyer)'
+2026-05-22 17:51:31.095 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5143/api/analytics/dashboard - 200 null application/json; charset=utf-8 9.7616ms
+2026-05-22 17:51:31.097 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Amount], [c].[BankName], [c].[Email], [c].[LoanTerm], [c].[LoanType], [c].[NameSurname], [c].[RiskScore], [c].[RiskStatus], [c].[Status]
+FROM [CreditApplications] AS [c]
+ORDER BY [c].[Id] DESC
+2026-05-22 17:51:31.098 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Vakifbankstajyer.Entities.CreditApplication, Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-22 17:51:31.098 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer) in 12.6268ms
+2026-05-22 17:51:31.098 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 17:51:31.098 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5143/api/applications/history - 200 null application/json; charset=utf-8 13.0994ms
+2026-05-22 17:51:35.196 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5143/api/applications/history - null null
+2026-05-22 17:51:35.196 +03:00 [INF] CORS policy execution successful.
+2026-05-22 17:51:35.196 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 17:51:35.196 +03:00 [INF] Route matched with {action = "GetHistory", controller = "Applications"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetHistory() on controller Vakifbankstajyer.Controllers.ApplicationsController (Vakifbankstajyer).
+2026-05-22 17:51:35.196 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5143/api/analytics/dashboard - null null
+2026-05-22 17:51:35.196 +03:00 [INF] CORS policy execution successful.
+2026-05-22 17:51:35.196 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.AnalyticsController.GetDashboardStats (Vakifbankstajyer)'
+2026-05-22 17:51:35.196 +03:00 [INF] Route matched with {action = "GetDashboardStats", controller = "Analytics"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetDashboardStats() on controller Vakifbankstajyer.Controllers.AnalyticsController (Vakifbankstajyer).
+2026-05-22 17:51:35.198 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Amount], [c].[BankName], [c].[Email], [c].[LoanTerm], [c].[LoanType], [c].[NameSurname], [c].[RiskScore], [c].[RiskStatus], [c].[Status]
+FROM [CreditApplications] AS [c]
+ORDER BY [c].[Id] DESC
+2026-05-22 17:51:35.198 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Amount], [c].[BankName], [c].[Email], [c].[LoanTerm], [c].[LoanType], [c].[NameSurname], [c].[RiskScore], [c].[RiskStatus], [c].[Status]
+FROM [CreditApplications] AS [c]
+2026-05-22 17:51:35.198 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Vakifbankstajyer.Entities.CreditApplication, Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-22 17:51:35.198 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer) in 1.9801ms
+2026-05-22 17:51:35.198 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 17:51:35.198 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5143/api/applications/history - 200 null application/json; charset=utf-8 2.4778ms
+2026-05-22 17:51:35.198 +03:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Age], [c].[Amount], [c].[CalculatedMonthlyPayment], [c].[CalculationDate], [c].[Housing], [c].[Job], [c].[ProductId], [c].[Purpose], [c].[RiskScore], [c].[RiskStatus], [c].[Sex], [c].[Term], [c].[TotalPayment]
+FROM [CalculationHistories] AS [c]
+2026-05-22 17:51:35.199 +03:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`9[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.List`1[[<>f__AnonymousType0`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[<>f__AnonymousType0`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]][], Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Double, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-05-22 17:51:35.199 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.AnalyticsController.GetDashboardStats (Vakifbankstajyer) in 2.2921ms
+2026-05-22 17:51:35.199 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.AnalyticsController.GetDashboardStats (Vakifbankstajyer)'
+2026-05-22 17:51:35.199 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5143/api/analytics/dashboard - 200 null application/json; charset=utf-8 2.677ms
+2026-05-22 17:51:35.579 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5143/api/applications/history - null null
+2026-05-22 17:51:35.579 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5143/api/analytics/dashboard - null null
+2026-05-22 17:51:35.579 +03:00 [INF] CORS policy execution successful.
+2026-05-22 17:51:35.579 +03:00 [INF] CORS policy execution successful.
+2026-05-22 17:51:35.579 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.AnalyticsController.GetDashboardStats (Vakifbankstajyer)'
+2026-05-22 17:51:35.579 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 17:51:35.580 +03:00 [INF] Route matched with {action = "GetDashboardStats", controller = "Analytics"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetDashboardStats() on controller Vakifbankstajyer.Controllers.AnalyticsController (Vakifbankstajyer).
+2026-05-22 17:51:35.580 +03:00 [INF] Route matched with {action = "GetHistory", controller = "Applications"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetHistory() on controller Vakifbankstajyer.Controllers.ApplicationsController (Vakifbankstajyer).
+2026-05-22 17:51:35.580 +03:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Amount], [c].[BankName], [c].[Email], [c].[LoanTerm], [c].[LoanType], [c].[NameSurname], [c].[RiskScore], [c].[RiskStatus], [c].[Status]
+FROM [CreditApplications] AS [c]
+ORDER BY [c].[Id] DESC
+2026-05-22 17:51:35.581 +03:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Amount], [c].[BankName], [c].[Email], [c].[LoanTerm], [c].[LoanType], [c].[NameSurname], [c].[RiskScore], [c].[RiskStatus], [c].[Status]
+FROM [CreditApplications] AS [c]
+2026-05-22 17:51:35.581 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Vakifbankstajyer.Entities.CreditApplication, Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-22 17:51:35.581 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer) in 1.1304ms
+2026-05-22 17:51:35.581 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 17:51:35.581 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5143/api/applications/history - 200 null application/json; charset=utf-8 1.7539ms
+2026-05-22 17:51:35.581 +03:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Age], [c].[Amount], [c].[CalculatedMonthlyPayment], [c].[CalculationDate], [c].[Housing], [c].[Job], [c].[ProductId], [c].[Purpose], [c].[RiskScore], [c].[RiskStatus], [c].[Sex], [c].[Term], [c].[TotalPayment]
+FROM [CalculationHistories] AS [c]
+2026-05-22 17:51:35.581 +03:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`9[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.List`1[[<>f__AnonymousType0`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[<>f__AnonymousType0`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]][], Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Double, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-05-22 17:51:35.581 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.AnalyticsController.GetDashboardStats (Vakifbankstajyer) in 1.7435ms
+2026-05-22 17:51:35.581 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.AnalyticsController.GetDashboardStats (Vakifbankstajyer)'
+2026-05-22 17:51:35.581 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5143/api/analytics/dashboard - 200 null application/json; charset=utf-8 2.0866ms
+2026-05-22 17:51:35.752 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5143/api/applications/history - null null
+2026-05-22 17:51:35.752 +03:00 [INF] CORS policy execution successful.
+2026-05-22 17:51:35.752 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 17:51:35.752 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5143/api/analytics/dashboard - null null
+2026-05-22 17:51:35.752 +03:00 [INF] Route matched with {action = "GetHistory", controller = "Applications"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetHistory() on controller Vakifbankstajyer.Controllers.ApplicationsController (Vakifbankstajyer).
+2026-05-22 17:51:35.752 +03:00 [INF] CORS policy execution successful.
+2026-05-22 17:51:35.752 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.AnalyticsController.GetDashboardStats (Vakifbankstajyer)'
+2026-05-22 17:51:35.752 +03:00 [INF] Route matched with {action = "GetDashboardStats", controller = "Analytics"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetDashboardStats() on controller Vakifbankstajyer.Controllers.AnalyticsController (Vakifbankstajyer).
+2026-05-22 17:51:35.753 +03:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Amount], [c].[BankName], [c].[Email], [c].[LoanTerm], [c].[LoanType], [c].[NameSurname], [c].[RiskScore], [c].[RiskStatus], [c].[Status]
+FROM [CreditApplications] AS [c]
+2026-05-22 17:51:35.753 +03:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Amount], [c].[BankName], [c].[Email], [c].[LoanTerm], [c].[LoanType], [c].[NameSurname], [c].[RiskScore], [c].[RiskStatus], [c].[Status]
+FROM [CreditApplications] AS [c]
+ORDER BY [c].[Id] DESC
+2026-05-22 17:51:35.753 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Vakifbankstajyer.Entities.CreditApplication, Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-22 17:51:35.753 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer) in 1.2011ms
+2026-05-22 17:51:35.753 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 17:51:35.754 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5143/api/applications/history - 200 null application/json; charset=utf-8 1.5943ms
+2026-05-22 17:51:35.754 +03:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Age], [c].[Amount], [c].[CalculatedMonthlyPayment], [c].[CalculationDate], [c].[Housing], [c].[Job], [c].[ProductId], [c].[Purpose], [c].[RiskScore], [c].[RiskStatus], [c].[Sex], [c].[Term], [c].[TotalPayment]
+FROM [CalculationHistories] AS [c]
+2026-05-22 17:51:35.754 +03:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`9[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.List`1[[<>f__AnonymousType0`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[<>f__AnonymousType0`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]][], Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Double, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-05-22 17:51:35.754 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.AnalyticsController.GetDashboardStats (Vakifbankstajyer) in 1.4929ms
+2026-05-22 17:51:35.754 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.AnalyticsController.GetDashboardStats (Vakifbankstajyer)'
+2026-05-22 17:51:35.754 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5143/api/analytics/dashboard - 200 null application/json; charset=utf-8 1.8021ms
+2026-05-22 17:51:35.946 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5143/api/applications/history - null null
+2026-05-22 17:51:35.947 +03:00 [INF] CORS policy execution successful.
+2026-05-22 17:51:35.947 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 17:51:35.947 +03:00 [INF] Route matched with {action = "GetHistory", controller = "Applications"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetHistory() on controller Vakifbankstajyer.Controllers.ApplicationsController (Vakifbankstajyer).
+2026-05-22 17:51:35.947 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5143/api/analytics/dashboard - null null
+2026-05-22 17:51:35.947 +03:00 [INF] CORS policy execution successful.
+2026-05-22 17:51:35.947 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.AnalyticsController.GetDashboardStats (Vakifbankstajyer)'
+2026-05-22 17:51:35.947 +03:00 [INF] Route matched with {action = "GetDashboardStats", controller = "Analytics"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetDashboardStats() on controller Vakifbankstajyer.Controllers.AnalyticsController (Vakifbankstajyer).
+2026-05-22 17:51:35.948 +03:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Amount], [c].[BankName], [c].[Email], [c].[LoanTerm], [c].[LoanType], [c].[NameSurname], [c].[RiskScore], [c].[RiskStatus], [c].[Status]
+FROM [CreditApplications] AS [c]
+ORDER BY [c].[Id] DESC
+2026-05-22 17:51:35.948 +03:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Amount], [c].[BankName], [c].[Email], [c].[LoanTerm], [c].[LoanType], [c].[NameSurname], [c].[RiskScore], [c].[RiskStatus], [c].[Status]
+FROM [CreditApplications] AS [c]
+2026-05-22 17:51:35.948 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Vakifbankstajyer.Entities.CreditApplication, Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-22 17:51:35.948 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer) in 1.2265ms
+2026-05-22 17:51:35.948 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 17:51:35.948 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5143/api/applications/history - 200 null application/json; charset=utf-8 1.608ms
+2026-05-22 17:51:35.948 +03:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Age], [c].[Amount], [c].[CalculatedMonthlyPayment], [c].[CalculationDate], [c].[Housing], [c].[Job], [c].[ProductId], [c].[Purpose], [c].[RiskScore], [c].[RiskStatus], [c].[Sex], [c].[Term], [c].[TotalPayment]
+FROM [CalculationHistories] AS [c]
+2026-05-22 17:51:35.948 +03:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`9[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.List`1[[<>f__AnonymousType0`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[<>f__AnonymousType0`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]][], Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Double, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-05-22 17:51:35.949 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.AnalyticsController.GetDashboardStats (Vakifbankstajyer) in 1.5636ms
+2026-05-22 17:51:35.949 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.AnalyticsController.GetDashboardStats (Vakifbankstajyer)'
+2026-05-22 17:51:35.949 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5143/api/analytics/dashboard - 200 null application/json; charset=utf-8 1.9084ms
+2026-05-22 17:52:18.730 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5143/api/calculations/history - null null
+2026-05-22 17:52:18.730 +03:00 [INF] CORS policy execution successful.
+2026-05-22 17:52:18.730 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.CalculationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 17:52:18.730 +03:00 [INF] Route matched with {action = "GetHistory", controller = "Calculations"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[Vakifbankstajyer.Entities.CalculationHistory]]] GetHistory() on controller Vakifbankstajyer.Controllers.CalculationsController (Vakifbankstajyer).
+2026-05-22 17:52:18.732 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5143/api/applications/history - null null
+2026-05-22 17:52:18.732 +03:00 [INF] CORS policy execution successful.
+2026-05-22 17:52:18.732 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 17:52:18.732 +03:00 [INF] Route matched with {action = "GetHistory", controller = "Applications"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetHistory() on controller Vakifbankstajyer.Controllers.ApplicationsController (Vakifbankstajyer).
+2026-05-22 17:52:18.737 +03:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Amount], [c].[BankName], [c].[Email], [c].[LoanTerm], [c].[LoanType], [c].[NameSurname], [c].[RiskScore], [c].[RiskStatus], [c].[Status]
+FROM [CreditApplications] AS [c]
+ORDER BY [c].[Id] DESC
+2026-05-22 17:52:18.738 +03:00 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Age], [c].[Amount], [c].[CalculatedMonthlyPayment], [c].[CalculationDate], [c].[Housing], [c].[Job], [c].[ProductId], [c].[Purpose], [c].[RiskScore], [c].[RiskStatus], [c].[Sex], [c].[Term], [c].[TotalPayment], [p].[Id], [p].[InterestRate], [p].[MaxAmount], [p].[MaxTerm], [p].[MinAmount], [p].[MinTerm], [p].[Name]
+FROM [CalculationHistories] AS [c]
+INNER JOIN [Products] AS [p] ON [c].[ProductId] = [p].[Id]
+ORDER BY [c].[CalculationDate] DESC
+2026-05-22 17:52:18.738 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Vakifbankstajyer.Entities.CreditApplication, Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-22 17:52:18.738 +03:00 [INF] Executing ObjectResult, writing value of type 'System.Collections.Generic.List`1[[Vakifbankstajyer.Entities.CalculationHistory, Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-22 17:52:18.738 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer) in 5.8433ms
+2026-05-22 17:52:18.738 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.CalculationsController.GetHistory (Vakifbankstajyer) in 7.6595ms
+2026-05-22 17:52:18.738 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 17:52:18.738 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.CalculationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 17:52:18.738 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5143/api/applications/history - 200 null application/json; charset=utf-8 6.5866ms
+2026-05-22 17:52:18.738 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5143/api/calculations/history - 200 null application/json; charset=utf-8 8.5329ms
+2026-05-22 17:52:25.359 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5143/api/applications/history - null null
+2026-05-22 17:52:25.359 +03:00 [INF] CORS policy execution successful.
+2026-05-22 17:52:25.359 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 17:52:25.359 +03:00 [INF] Route matched with {action = "GetHistory", controller = "Applications"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetHistory() on controller Vakifbankstajyer.Controllers.ApplicationsController (Vakifbankstajyer).
+2026-05-22 17:52:25.360 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5143/api/analytics/dashboard - null null
+2026-05-22 17:52:25.360 +03:00 [INF] CORS policy execution successful.
+2026-05-22 17:52:25.360 +03:00 [INF] Executing endpoint 'Vakifbankstajyer.Controllers.AnalyticsController.GetDashboardStats (Vakifbankstajyer)'
+2026-05-22 17:52:25.360 +03:00 [INF] Route matched with {action = "GetDashboardStats", controller = "Analytics"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetDashboardStats() on controller Vakifbankstajyer.Controllers.AnalyticsController (Vakifbankstajyer).
+2026-05-22 17:52:25.361 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Amount], [c].[BankName], [c].[Email], [c].[LoanTerm], [c].[LoanType], [c].[NameSurname], [c].[RiskScore], [c].[RiskStatus], [c].[Status]
+FROM [CreditApplications] AS [c]
+ORDER BY [c].[Id] DESC
+2026-05-22 17:52:25.362 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Vakifbankstajyer.Entities.CreditApplication, Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-05-22 17:52:25.362 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer) in 2.2556ms
+2026-05-22 17:52:25.362 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.ApplicationsController.GetHistory (Vakifbankstajyer)'
+2026-05-22 17:52:25.362 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5143/api/applications/history - 200 null application/json; charset=utf-8 2.965ms
+2026-05-22 17:52:25.363 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Amount], [c].[BankName], [c].[Email], [c].[LoanTerm], [c].[LoanType], [c].[NameSurname], [c].[RiskScore], [c].[RiskStatus], [c].[Status]
+FROM [CreditApplications] AS [c]
+2026-05-22 17:52:25.365 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Age], [c].[Amount], [c].[CalculatedMonthlyPayment], [c].[CalculationDate], [c].[Housing], [c].[Job], [c].[ProductId], [c].[Purpose], [c].[RiskScore], [c].[RiskStatus], [c].[Sex], [c].[Term], [c].[TotalPayment]
+FROM [CalculationHistories] AS [c]
+2026-05-22 17:52:25.365 +03:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`9[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.List`1[[<>f__AnonymousType0`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[<>f__AnonymousType0`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]][], Vakifbankstajyer, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Double, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-05-22 17:52:25.365 +03:00 [INF] Executed action Vakifbankstajyer.Controllers.AnalyticsController.GetDashboardStats (Vakifbankstajyer) in 4.9012ms
+2026-05-22 17:52:25.366 +03:00 [INF] Executed endpoint 'Vakifbankstajyer.Controllers.AnalyticsController.GetDashboardStats (Vakifbankstajyer)'
+2026-05-22 17:52:25.366 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5143/api/analytics/dashboard - 200 null application/json; charset=utf-8 5.5012ms
